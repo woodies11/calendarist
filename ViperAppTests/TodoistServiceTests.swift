@@ -11,9 +11,14 @@ import XCTest
 
 class TodoistServiceTests: XCTestCase {
     
+    // This is an Implicitly Unwrapped Optionals.
+    // The Todolist Service which we will initialzed in setUp()
+    var tdService: TodoistService!
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        tdService = TodoistService();
     }
     
     override func tearDown() {
@@ -21,22 +26,19 @@ class TodoistServiceTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    // MARK: - Test Cases
+    // ==========================================================
     
     func testGetAllProjects() {
-        let tdService = TodoistService();
         let projects = tdService.getAllProjects()
         XCTAssertEqual(projects, ["a", "b", "c", "d"])
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
     
 }
