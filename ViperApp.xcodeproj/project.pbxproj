@@ -93,6 +93,7 @@
 		4F3C755C205AA5AF0088E189 /* ViperApp */ = {
 			isa = PBXGroup;
 			children = (
+				4F4B3754205AE22600660151 /* Entities */,
 				4F4B3722205AD6B600660151 /* Services */,
 				4F4B371F205AD50500660151 /* Modules */,
 				4F3C755D205AA5AF0088E189 /* AppDelegate.swift */,
@@ -118,6 +119,7 @@
 		4F4B371F205AD50500660151 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4F4B3753205AE1E900660151 /* LoginPage */,
 				4F4B3721205AD53100660151 /* SettingPage */,
 				4F4B3720205AD51E00660151 /* DashboardMain */,
 			);
@@ -144,6 +146,20 @@
 				4F4B3723205AD6FC00660151 /* TodoistService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		4F4B3753205AE1E900660151 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LoginPage;
+			sourceTree = "<group>";
+		};
+		4F4B3754205AE22600660151 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		AD425EC1B22C6F5A983A6112 /* Frameworks */ = {
