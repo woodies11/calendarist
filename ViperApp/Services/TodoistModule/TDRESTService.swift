@@ -26,15 +26,25 @@ class TDRESTService: TDRESTServiceProtocol {
     }
     
     func getAllProjects(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDProject]) -> Void) {
+        // Include the OAuth token
         let headers = [
             "Authorization": "Bearer \(token)"
         ]
         
+        // Create a network request using Alamofire.
+        // We can wrap this in a NetworkService class so Alamofire can
+        // be replaced if necessary. But since this app is so small,
+        // we will be keeping it simple for now.
         Alamofire.request(TodolistAPI.projects.url, headers: headers).responseArray { (response: DataResponse<[TDProject]>) in
+            
+            // TODO: May need to look at other possible sign of error
+            
             guard let projects = response.result.value else {
                 errorHandler?(response.error)
                 return
             }
+            
+            // Return the list of TDProjects
             successHandler(projects)
         }
     }
