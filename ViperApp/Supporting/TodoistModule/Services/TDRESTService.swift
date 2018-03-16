@@ -67,6 +67,8 @@ class TDRESTService: TDRESTServiceProtocol {
     
     func getTasks(withFilter filters: TDFilter?, errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDTask]) -> Void) {
         
+        // TODO: Need to pass in Filters as well... but how to test?
+        
         let headers = [
             "Authorization": "Bearer \(token)"
         ]

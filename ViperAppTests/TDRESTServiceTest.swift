@@ -34,6 +34,7 @@ class TDRESTServiceTest: XCTestCase {
     // MARK: - Test Cases
     // ============================================
     
+    // MARK: - Basic Queries
     func testGetAllProjects() {
         
         // Stub Alamofire response to /projects URL to return our test JSON

@@ -83,11 +83,9 @@
 		4F28642A205BA37E0073FFA5 /* TodoistModule */ = {
 			isa = PBXGroup;
 			children = (
+				4F61E5F4205C3F660030C4A3 /* Services */,
+				4F61E5F3205C3F550030C4A3 /* Entities */,
 				4F28642B205BA3F90073FFA5 /* TodoistModule.swift */,
-				4F4B3723205AD6FC00660151 /* TDRESTService.swift */,
-				4F4B3755205B74A000660151 /* TDOAuthService.swift */,
-				4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */,
-				4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */,
 			);
 			path = TodoistModule;
 			sourceTree = "<group>";
@@ -117,7 +115,7 @@
 			children = (
 				4F61E5EE205BF7EA0030C4A3 /* Common */,
 				4F4B3754205AE22600660151 /* Entities */,
-				4F4B3722205AD6B600660151 /* Services */,
+				4F4B3722205AD6B600660151 /* Supporting */,
 				4F4B371F205AD50500660151 /* Pages */,
 				4F3C755D205AA5AF0088E189 /* AppDelegate.swift */,
 				4F3C7561205AA5AF0088E189 /* Main.storyboard */,
@@ -162,12 +160,12 @@
 			path = SettingPage;
 			sourceTree = "<group>";
 		};
-		4F4B3722205AD6B600660151 /* Services */ = {
+		4F4B3722205AD6B600660151 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
 				4F28642A205BA37E0073FFA5 /* TodoistModule */,
 			);
-			path = Services;
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		4F4B3753205AE1E900660151 /* LoginPage */ = {
@@ -191,6 +189,24 @@
 			children = (
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		4F61E5F3205C3F550030C4A3 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */,
+				4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		4F61E5F4205C3F660030C4A3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4F4B3723205AD6FC00660151 /* TDRESTService.swift */,
+				4F4B3755205B74A000660151 /* TDOAuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		AD425EC1B22C6F5A983A6112 /* Frameworks */ = {
