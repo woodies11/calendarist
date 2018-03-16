@@ -15,9 +15,9 @@
 		4F3C7565205AA5AF0088E189 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7564205AA5AF0088E189 /* Assets.xcassets */; };
 		4F3C7568205AA5AF0088E189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7566205AA5AF0088E189 /* LaunchScreen.storyboard */; };
 		4F3C7573205AA5AF0088E189 /* ViperAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */; };
-		4F4B3724205AD6FC00660151 /* TodoistSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3723205AD6FC00660151 /* TodoistSyncService.swift */; };
-		4F4B3726205AD84800660151 /* TodoistServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3725205AD84800660151 /* TodoistServiceTests.swift */; };
-		4F4B3756205B74A000660151 /* TodoistOAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3755205B74A000660151 /* TodoistOAuthService.swift */; };
+		4F4B3724205AD6FC00660151 /* TDRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3723205AD6FC00660151 /* TDRESTService.swift */; };
+		4F4B3726205AD84800660151 /* TDRESTServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3725205AD84800660151 /* TDRESTServiceTest.swift */; };
+		4F4B3756205B74A000660151 /* TDOAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3755205B74A000660151 /* TDOAuthService.swift */; };
 		4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */; };
 		4F61E5F2205BFCB00030C4A3 /* TDEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */; };
 		4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7BB785205BC15100915911 /* LoginPageProtocols.swift */; };
@@ -47,9 +47,9 @@
 		4F3C756E205AA5AF0088E189 /* ViperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViperAppTests.swift; sourceTree = "<group>"; };
 		4F3C7574205AA5AF0088E189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F4B3723205AD6FC00660151 /* TodoistSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistSyncService.swift; sourceTree = "<group>"; };
-		4F4B3725205AD84800660151 /* TodoistServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistServiceTests.swift; sourceTree = "<group>"; };
-		4F4B3755205B74A000660151 /* TodoistOAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistOAuthService.swift; sourceTree = "<group>"; };
+		4F4B3723205AD6FC00660151 /* TDRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDRESTService.swift; sourceTree = "<group>"; };
+		4F4B3725205AD84800660151 /* TDRESTServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDRESTServiceTest.swift; sourceTree = "<group>"; };
+		4F4B3755205B74A000660151 /* TDOAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDOAuthService.swift; sourceTree = "<group>"; };
 		4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEndpoint.swift; sourceTree = "<group>"; };
 		4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEntities.swift; sourceTree = "<group>"; };
 		4F7BB785205BC15100915911 /* LoginPageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageProtocols.swift; sourceTree = "<group>"; };
@@ -83,9 +83,9 @@
 		4F28642A205BA37E0073FFA5 /* TodoistModule */ = {
 			isa = PBXGroup;
 			children = (
-				4F4B3723205AD6FC00660151 /* TodoistSyncService.swift */,
-				4F4B3755205B74A000660151 /* TodoistOAuthService.swift */,
 				4F28642B205BA3F90073FFA5 /* TodoistModule.swift */,
+				4F4B3723205AD6FC00660151 /* TDRESTService.swift */,
+				4F4B3755205B74A000660151 /* TDOAuthService.swift */,
 				4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */,
 				4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */,
 			);
@@ -131,7 +131,7 @@
 		4F3C7571205AA5AF0088E189 /* ViperAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				4F4B3725205AD84800660151 /* TodoistServiceTests.swift */,
+				4F4B3725205AD84800660151 /* TDRESTServiceTest.swift */,
 				4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */,
 				4F3C7574205AA5AF0088E189 /* Info.plist */,
 			);
@@ -437,8 +437,8 @@
 				4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */,
 				4F3C7560205AA5AF0088E189 /* LoginPageViewController.swift in Sources */,
 				4F28642C205BA3F90073FFA5 /* TodoistModule.swift in Sources */,
-				4F4B3756205B74A000660151 /* TodoistOAuthService.swift in Sources */,
-				4F4B3724205AD6FC00660151 /* TodoistSyncService.swift in Sources */,
+				4F4B3756205B74A000660151 /* TDOAuthService.swift in Sources */,
+				4F4B3724205AD6FC00660151 /* TDRESTService.swift in Sources */,
 				4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */,
 				4F3C755E205AA5AF0088E189 /* AppDelegate.swift in Sources */,
 			);
@@ -448,7 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F4B3726205AD84800660151 /* TodoistServiceTests.swift in Sources */,
+				4F4B3726205AD84800660151 /* TDRESTServiceTest.swift in Sources */,
 				4F3C7573205AA5AF0088E189 /* ViperAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

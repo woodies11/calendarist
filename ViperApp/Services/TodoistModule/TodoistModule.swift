@@ -12,17 +12,17 @@ class TodoistModule {
     
     var token: String?
     
-    var tdOAuthService: TodoistOAuthService!
-    var tdSyncService: TodoistSyncService!
+    var tdOAuthService: TDOAuthService!
+    var tdSyncService: TDRESTService!
     
     // TODO: change to completion handler
     func authenticate() {
-        tdOAuthService = TodoistOAuthService()
+        tdOAuthService = TDOAuthService()
         
         // try to get token
         tdOAuthService.initiateOAuth(error: nil) { (access_token) in
             self.token = access_token
-            tdSyncService = TodoistSyncService(token: token!)
+            tdSyncService = TDRESTService(token: token!)
         }
     }
     

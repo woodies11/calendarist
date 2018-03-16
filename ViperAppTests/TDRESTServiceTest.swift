@@ -9,7 +9,7 @@
 import XCTest
 @testable import ViperApp
 
-class TodoistServiceTests: XCTestCase {
+class TDRESTServiceTest: XCTestCase {
     
     // This is an Implicitly Unwrapped Optionals.
     // The Todolist Service which we will initialzed in setUp()

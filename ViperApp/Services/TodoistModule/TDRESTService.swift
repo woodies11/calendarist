@@ -10,7 +10,15 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
-class TodoistSyncService {
+typealias ErrorCompletionHandler = ((error: NSError) -> Void)?
+
+protocol TDRestServiceProtocol {
+    func getAllProjects(@escaping errorHandler: ErrorCompletionHandler, @escaping successHandler: (projects: [TDProject]))
+    func getAllLabels(@escaping errorHandler: ErrorCompletionHandler, @escaping successHandler: (labels: [TDLabel]))
+    func getTasks(withFilter filters: TDFilter?, @escaping errorHandler: ErrorCompletionHandler, @escaping successHandler: (tasks: [TDTask]))
+}
+
+class TDRESTService {
     
     private var token: String!
     

@@ -13,7 +13,7 @@ protocol OAuthService: AnyObject {
     func initiateOAuth(error: ((AnyObject?) -> Void)?, success: (String) -> Void)
 }
 
-class TodoistOAuthService: OAuthService {
+class TDOAuthService: OAuthService {
     
     func initiateOAuth(error: ((AnyObject?) -> Void)?, success: (String) -> Void) {
         success("3bb73220404b28e6aad84f27e04d549c9c22ae35")

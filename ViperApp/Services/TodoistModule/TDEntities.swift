@@ -42,6 +42,12 @@ struct TDTask {
     var url: String!
 }
 
+struct TDFilter {
+    var project_id: Int?
+    var label_id: [Int]?
+    var filter: String?
+    var lang: String?
+}
 
 
 // ============================================
