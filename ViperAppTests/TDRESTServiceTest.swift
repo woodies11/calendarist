@@ -67,6 +67,7 @@ class TDRESTServiceTest: XCTestCase {
     // ============================================
     
     func testGetAllProjects() {
+        // stub Alamofire response to /projects URL to return our test JSON
         stub(uri(TodolistAPI.projects.url), json(MOCK_PROJECTS_JSON))
         
         let expectation = XCTestExpectation(description: "Expect funtion to return a list of TDProjects")

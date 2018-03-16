@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
-typealias ErrorCompletionHandler = ((_ error: NSError) -> Void)?
+typealias ErrorCompletionHandler = ((_ error: Error?) -> Void)?
 
 protocol TDRESTServiceProtocol {
     func getAllProjects(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDProject]) -> Void)
@@ -26,7 +26,17 @@ class TDRESTService: TDRESTServiceProtocol {
     }
     
     func getAllProjects(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDProject]) -> Void) {
+        let headers = [
+            "Authorization": "Bearer \(token)"
+        ]
         
+        Alamofire.request(TodolistAPI.projects.url, headers: headers).responseArray { (response: DataResponse<[TDProject]>) in
+            guard let projects = response.result.value else {
+                errorHandler?(response.error)
+                return
+            }
+            successHandler(projects)
+        }
     }
     
     func getAllLabels(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDLabel]) -> Void) {
