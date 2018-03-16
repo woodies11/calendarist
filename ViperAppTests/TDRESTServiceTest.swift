@@ -79,7 +79,7 @@ class TDRESTServiceTest: XCTestCase {
         
         
         tdService.getAllProjects(nil) { projects in
-            XCTAssert( expectedResult.count == projects.count)
+            XCTAssert(expectedResult == projects)
             expectation.fulfill()
         }
         
