@@ -13,32 +13,29 @@ class TDRESTServiceTest: XCTestCase {
     
     // This is an Implicitly Unwrapped Optionals.
     // The Todolist Service which we will initialzed in setUp()
-    var tdService: TodoistService!
+    var tdService: TDRESTServiceProtocol!
+    
+    // ============================================
+    // MARK: - SetUp and TearDown
+    // ============================================
+    // These methods are called before the invocation of each test method in the class.
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        tdService = TodoistService();
+        tdService = TDRESTService("testtokenABCDEFG");
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
+    // ============================================
     // MARK: - Test Cases
-    // ==========================================================
+    // ============================================
     
     func testGetAllProjects() {
         let projects = tdService.getAllProjects()
         XCTAssertEqual(projects, ["a", "b", "c", "d"])
     }
-    
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
     
 }

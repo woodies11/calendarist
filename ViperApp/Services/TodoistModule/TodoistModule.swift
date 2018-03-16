@@ -32,14 +32,14 @@ class TodoistModule {
             authenticate()
         }
         
-        tdSyncService.getAllProjects() { (result) in
-            var projects = [String]()
-            for project in result {
-                projects.append(project.name)
-            }
-            
-            success(projects)
-        }
+//        tdSyncService.getAllProjects() { (result) in
+//            var projects = [String]()
+//            for project in result {
+//                projects.append(project.name)
+//            }
+//            
+//            success(projects)
+//        }
     }
     
     func isAuthenticated() -> Bool {
