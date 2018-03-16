@@ -13,7 +13,7 @@
         <!--ConnectPage-->
         <scene sceneID="gvZ-6B-mok">
             <objects>
-                <viewController storyboardIdentifier="ConnectPage" title="ConnectPage" id="SaB-fe-aGu" customClass="ViewController" customModule="ViperApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConnectPage" title="ConnectPage" id="SaB-fe-aGu" customClass="LoginPageViewController" customModule="ViperApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XAG-Mu-Jhf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,6 +31,9 @@
                                 <state key="normal" title="Connect to Todoist">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="onConnectButtonPressed:" destination="SaB-fe-aGu" eventType="touchUpInside" id="asu-hM-gYT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
