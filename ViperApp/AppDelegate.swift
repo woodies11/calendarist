@@ -16,6 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let tdModule = TodoistModule()
+        
+        let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewControlleripad : UIViewController!
+        
+        if tdModule.isAuthenticated() {
+            initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "MainPage") as UIViewController
+        } else {
+            initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "ConnectPage") as UIViewController
+        }
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = initialViewControlleripad
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

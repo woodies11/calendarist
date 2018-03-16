@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		45683860A563AEF007D2D28D /* Pods_ViperApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59DBF9B77FEF919857AA6717 /* Pods_ViperApp.framework */; };
+		4F28642C205BA3F90073FFA5 /* TodoistModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28642B205BA3F90073FFA5 /* TodoistModule.swift */; };
 		4F3C755E205AA5AF0088E189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C755D205AA5AF0088E189 /* AppDelegate.swift */; };
 		4F3C7560205AA5AF0088E189 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C755F205AA5AF0088E189 /* ViewController.swift */; };
 		4F3C7563205AA5AF0088E189 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7561205AA5AF0088E189 /* Main.storyboard */; };
 		4F3C7565205AA5AF0088E189 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7564205AA5AF0088E189 /* Assets.xcassets */; };
 		4F3C7568205AA5AF0088E189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7566205AA5AF0088E189 /* LaunchScreen.storyboard */; };
 		4F3C7573205AA5AF0088E189 /* ViperAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */; };
-		4F4B3724205AD6FC00660151 /* TodoistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3723205AD6FC00660151 /* TodoistService.swift */; };
+		4F4B3724205AD6FC00660151 /* TodoistSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3723205AD6FC00660151 /* TodoistSyncService.swift */; };
 		4F4B3726205AD84800660151 /* TodoistServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3725205AD84800660151 /* TodoistServiceTests.swift */; };
+		4F4B3756205B74A000660151 /* TodoistOAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3755205B74A000660151 /* TodoistOAuthService.swift */; };
 		9809D87197CF5BF795035D29 /* Pods_ViperAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B4D179AE49A581BE26C9FD /* Pods_ViperAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		486FBB99E43E90B80F32D70D /* Pods-ViperAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViperAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViperAppTests/Pods-ViperAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4F28642B205BA3F90073FFA5 /* TodoistModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistModule.swift; sourceTree = "<group>"; };
 		4F3C755A205AA5AF0088E189 /* ViperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3C755D205AA5AF0088E189 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F3C755F205AA5AF0088E189 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,8 +44,9 @@
 		4F3C756E205AA5AF0088E189 /* ViperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViperAppTests.swift; sourceTree = "<group>"; };
 		4F3C7574205AA5AF0088E189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F4B3723205AD6FC00660151 /* TodoistService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistService.swift; sourceTree = "<group>"; };
+		4F4B3723205AD6FC00660151 /* TodoistSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistSyncService.swift; sourceTree = "<group>"; };
 		4F4B3725205AD84800660151 /* TodoistServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistServiceTests.swift; sourceTree = "<group>"; };
+		4F4B3755205B74A000660151 /* TodoistOAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistOAuthService.swift; sourceTree = "<group>"; };
 		59DBF9B77FEF919857AA6717 /* Pods_ViperApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViperApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D978D063FCA25ECD2D69641 /* Pods-ViperApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViperApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViperApp/Pods-ViperApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B4D179AE49A581BE26C9FD /* Pods_ViperAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViperAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +74,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F28642A205BA37E0073FFA5 /* TodoistModule */ = {
+			isa = PBXGroup;
+			children = (
+				4F4B3723205AD6FC00660151 /* TodoistSyncService.swift */,
+				4F4B3755205B74A000660151 /* TodoistOAuthService.swift */,
+				4F28642B205BA3F90073FFA5 /* TodoistModule.swift */,
+			);
+			path = TodoistModule;
+			sourceTree = "<group>";
+		};
 		4F3C7551205AA5AF0088E189 = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +157,7 @@
 		4F4B3722205AD6B600660151 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4F4B3723205AD6FC00660151 /* TodoistService.swift */,
+				4F28642A205BA37E0073FFA5 /* TodoistModule */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -363,10 +377,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ViperApp/Pods-ViperApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -399,7 +417,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F3C7560205AA5AF0088E189 /* ViewController.swift in Sources */,
-				4F4B3724205AD6FC00660151 /* TodoistService.swift in Sources */,
+				4F28642C205BA3F90073FFA5 /* TodoistModule.swift in Sources */,
+				4F4B3756205B74A000660151 /* TodoistOAuthService.swift in Sources */,
+				4F4B3724205AD6FC00660151 /* TodoistSyncService.swift in Sources */,
 				4F3C755E205AA5AF0088E189 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
