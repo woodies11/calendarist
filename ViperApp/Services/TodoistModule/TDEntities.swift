@@ -9,17 +9,38 @@
 import Foundation
 import ObjectMapper
 
-struct TDProject {
+struct TDProject: Comparable {
     var id: String!
     var name: String!
     var indent: Int!
     var order: Int!
+    
+    static func <(lhs: TDProject, rhs: TDProject) -> Bool {
+        return lhs.order < rhs.order
+    }
+    
+    static func ==(lhs: TDProject, rhs: TDProject) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.name == rhs.name &&
+        lhs.indent == rhs.indent &&
+        lhs.order == rhs.order
+    }
 }
 
-struct TDLabel {
+struct TDLabel: Comparable {
     var id: Int!
     var name: String!
     var order: Int!
+    
+    static func <(lhs: TDLabel, rhs: TDLabel) -> Bool {
+        return lhs.order < rhs.order
+    }
+    
+    static func ==(lhs: TDLabel, rhs: TDLabel) -> Bool {
+        return lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.order == rhs.order
+    }
 }
 
 struct TDDue {
