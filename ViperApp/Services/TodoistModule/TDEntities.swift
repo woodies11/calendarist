@@ -50,7 +50,7 @@ struct TDDue {
     var timezone: String!
 }
 
-struct TDTask {
+struct TDTask: Comparable {
     var id: Int!
     var completed: Bool = false
     var content: String!
@@ -61,6 +61,15 @@ struct TDTask {
     var project_id: Int!
     var label_ids: [Int] = [Int]()
     var url: String!
+    
+    static func <(lhs: TDTask, rhs: TDTask) -> Bool {
+        return lhs.order < rhs.order
+    }
+    
+    static func ==(lhs: TDTask, rhs: TDTask) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
 }
 
 struct TDFilter {

@@ -51,9 +51,33 @@ class TDRESTService: TDRESTServiceProtocol {
     
     func getAllLabels(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDLabel]) -> Void) {
         
+        let headers = [
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        Alamofire.request(TodolistAPI.labels.url, headers: headers).responseArray { (response: DataResponse<[TDLabel]>) in
+            guard let dataArray = response.result.value else {
+                errorHandler?(response.error)
+                return
+            }
+            successHandler(dataArray)
+        }
+        
     }
     
     func getTasks(withFilter filters: TDFilter?, errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDTask]) -> Void) {
+        
+        let headers = [
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        Alamofire.request(TodolistAPI.tasks.url, headers: headers).responseArray { (response: DataResponse<[TDTask]>) in
+            guard let dataArray = response.result.value else {
+                errorHandler?(response.error)
+                return
+            }
+            successHandler(dataArray)
+        }
         
     }
     
