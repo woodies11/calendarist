@@ -12,18 +12,29 @@ import AlamofireObjectMapper
 
 typealias ErrorCompletionHandler = ((_ error: NSError) -> Void)?
 
-protocol TDRestServiceProtocol {
+protocol TDRESTServiceProtocol {
     func getAllProjects(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDProject]) -> Void)
     func getAllLabels(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDLabel]) -> Void)
     func getTasks(withFilter filters: TDFilter?, errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDTask]) -> Void)
 }
 
-class TDRESTService {
-    
+class TDRESTService: TDRESTServiceProtocol {
     private var token: String!
     
     init(token: String) {
         self.token = token
+    }
+    
+    func getAllProjects(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDProject]) -> Void) {
+        
+    }
+    
+    func getAllLabels(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDLabel]) -> Void) {
+        
+    }
+    
+    func getTasks(withFilter filters: TDFilter?, errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDTask]) -> Void) {
+        
     }
     
 }

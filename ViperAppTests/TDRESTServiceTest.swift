@@ -22,7 +22,7 @@ class TDRESTServiceTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        tdService = TDRESTService("testtokenABCDEFG");
+        tdService = TDRESTService(token: "testtokenABCDEFG");
     }
     
     override func tearDown() {
@@ -34,8 +34,15 @@ class TDRESTServiceTest: XCTestCase {
     // ============================================
     
     func testGetAllProjects() {
-        let projects = tdService.getAllProjects()
-        XCTAssertEqual(projects, ["a", "b", "c", "d"])
+        
+    }
+    
+    func testGetAllLabels() {
+        
+    }
+    
+    func testGetTasks() {
+        
     }
     
 }
