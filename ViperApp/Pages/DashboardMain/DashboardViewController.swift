@@ -17,7 +17,6 @@ class DashboardViewController: UIViewController {
 
     var presentator: DashboardPresentatorProtocol?
     
-    
     // Class variables
     var taskList: [DashboardTask] = []
 

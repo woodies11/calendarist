@@ -22,8 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewControlleripad : UIViewController!
         
+        
         if tdModule.isAuthenticated() {
-            initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "MainPage") as UIViewController
+            initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "DashboardNavViewController") as UIViewController
         } else {
             initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "ConnectPage") as UIViewController
         }
