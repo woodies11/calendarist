@@ -10,3 +10,5 @@ enum NetworkResult<T> {
     case error
     case success(T)
 }
+
+typealias NetworkCompletionHandler<T> = (_ result: NetworkResult<T>) -> Void

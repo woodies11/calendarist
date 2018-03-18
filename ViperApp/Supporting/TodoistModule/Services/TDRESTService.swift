@@ -10,22 +10,23 @@ import Foundation
 import Alamofire
 import AlamofireObjectMapper
 
-typealias ErrorCompletionHandler = ((_ error: Error?) -> Void)?
+
 
 protocol TDRESTServiceProtocol {
-    func getAllProjects(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDProject]) -> Void)
-    func getAllLabels(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDLabel]) -> Void)
-    func getTasks(withFilter filters: TDFilter?, errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDTask]) -> Void)
+    func getAllProjects(completion: @escaping NetworkCompletionHandler<[TDProject]>)
+    func getAllLabels(completion: @escaping NetworkCompletionHandler<[TDLabel]>)
+    func getTasks(withFilter filters: TDFilter?, completion: @escaping NetworkCompletionHandler<[TDTask]>)
 }
 
 class TDRESTService: TDRESTServiceProtocol {
+    
     private var token: String!
     
     init(token: String) {
         self.token = token
     }
     
-    func getAllProjects(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDProject]) -> Void) {
+    func getAllProjects(completion: @escaping (NetworkResult<[TDProject]>) -> Void) {
         // Include the OAuth token
         let headers = [
             "Authorization": "Bearer \(token)"
@@ -37,19 +38,17 @@ class TDRESTService: TDRESTServiceProtocol {
         // we will be keeping it simple for now.
         Alamofire.request(TodolistAPI.projects.url, headers: headers).responseArray { (response: DataResponse<[TDProject]>) in
             
-            // TODO: May need to look at other possible sign of error
-            
-            guard let projects = response.result.value else {
-                errorHandler?(response.error)
+            guard let projects = response.value else {
+                completion(.error)
                 return
             }
             
             // Return the list of TDProjects
-            successHandler(projects)
+            completion(.success(projects))
         }
     }
     
-    func getAllLabels(_ errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDLabel]) -> Void) {
+    func getAllLabels(completion: @escaping (NetworkResult<[TDLabel]>) -> Void) {
         
         let headers = [
             "Authorization": "Bearer \(token)"
@@ -57,15 +56,15 @@ class TDRESTService: TDRESTServiceProtocol {
         
         Alamofire.request(TodolistAPI.labels.url, headers: headers).responseArray { (response: DataResponse<[TDLabel]>) in
             guard let dataArray = response.result.value else {
-                errorHandler?(response.error)
+                completion(.error)
                 return
             }
-            successHandler(dataArray)
+            completion(.success(dataArray))
         }
         
     }
     
-    func getTasks(withFilter filters: TDFilter?, errorHandler: ErrorCompletionHandler, successHandler: @escaping ([TDTask]) -> Void) {
+    func getTasks(withFilter filters: TDFilter?, completion: @escaping (NetworkResult<[TDTask]>) -> Void) {
         
         // TODO: Need to pass in Filters as well... but how to test?
         
@@ -75,10 +74,10 @@ class TDRESTService: TDRESTServiceProtocol {
         
         Alamofire.request(TodolistAPI.tasks.url, headers: headers).responseArray { (response: DataResponse<[TDTask]>) in
             guard let dataArray = response.result.value else {
-                errorHandler?(response.error)
+                completion(.error)
                 return
             }
-            successHandler(dataArray)
+            completion(.success(dataArray))
         }
         
     }

@@ -62,9 +62,14 @@ class TDRESTServiceTest: XCTestCase {
         // Make the function call and wait for response.
         // Note that we are not testing for Error right now so passing nil
         // for errorHandler is fine
-        tdService.getAllProjects(nil) { projects in
-            XCTAssert(expectedResult == projects)
-            expectation.fulfill()
+        tdService.getAllProjects() { result in
+            switch result {
+            case .success(let projects):
+                XCTAssert(expectedResult == projects)
+                expectation.fulfill()
+            case .error:
+                XCTFail("An error occurred durring network request.")
+            }
         }
         
         // Wait for Async task to return or timeout.
@@ -92,8 +97,13 @@ class TDRESTServiceTest: XCTestCase {
         expectedResult.append(TDLabel(id: 2148914673, name: "next_action", order: 2))
         expectedResult.append(TDLabel(id: 2148914711, name: "grade_impact", order: 3))
         
-        tdService.getAllLabels(nil) { labels in
-            XCTAssert(expectedResult == labels)
+        tdService.getAllLabels() { result in
+            switch result {
+            case .success(let projects):
+                XCTAssert(expectedResult == projects)
+            case .error:
+                XCTFail("An error occurred durring network request.")
+            }
             expectation.fulfill()
         }
         
@@ -171,9 +181,14 @@ class TDRESTServiceTest: XCTestCase {
             )
         )
         
-        tdService.getTasks(withFilter: nil, errorHandler: nil) { tasks in
-            XCTAssert(expectedResult == tasks)
-            expectation.fulfill()
+        tdService.getTasks(withFilter: nil) { result in
+            switch result {
+            case .success(let projects):
+                XCTAssert(expectedResult == projects)
+                expectation.fulfill()
+            case .error:
+                XCTFail("An error occurred durring network request.")
+            }
         }
         
         wait(for: [expectation], timeout: 1.0)
