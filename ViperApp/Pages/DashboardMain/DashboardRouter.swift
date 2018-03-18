@@ -11,6 +11,7 @@ import UIKit
 
 protocol DashboardRouterProtocol: RouterProtocol {
     static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
+    func presentFilterList()
 }
 
 class DashboardRouter: DashboardRouterProtocol {
@@ -27,8 +28,7 @@ class DashboardRouter: DashboardRouterProtocol {
         let navController = mainStoryboard.instantiateViewController(withIdentifier: "DashboardNavViewController")
         guard let dashboardViewController = navController.childViewControllers.first as? DashboardViewController
             else {
-                // FIXME: should throw an exception or something
-                return UIViewController()
+                fatalError("Unable to get DashboardViewController")
         }
         
         // Create and assign the needed component to our ViewController
@@ -39,11 +39,14 @@ class DashboardRouter: DashboardRouterProtocol {
         presentator.interactor = interactor
         presentator.router = router
         presentator.view = dashboardViewController
-        
         dashboardViewController.presentator = presentator
         
         // Don't forget that we do need the NavViewController
         return navController
+    }
+    
+    func presentFilterList() {
+        
     }
 }
 

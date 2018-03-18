@@ -21,7 +21,11 @@ class DashboardViewController: UIViewController, DashboardViewControllerProtocol
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
     
-    // Class variables
+    // We could have the Presentator ask for a list of task only
+    // for a specific date from the Interactor but since we need
+    // all the task present in that month to display the whole
+    // calendar anyway, let's just have the tableview decide
+    // what to display by itself.
     var taskList: [Date: [String]] = [:] {
         didSet {
             tableView.reloadData()
@@ -29,6 +33,10 @@ class DashboardViewController: UIViewController, DashboardViewControllerProtocol
         }
     }
 
+    @IBAction func onFilterButtonTapped(_ sender: Any) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -18,6 +18,11 @@ class DashboardPresentator: DashboardPresentatorDelegate {
     var interactor: DashboardInteractorProtocol!
     var router: DashboardRouterProtocol!
     
+    // Store ID of projects and labels to filter for.
+    // Will fetch all if empty.
+    var projectToShow: [Int] = []
+    var labelToShow: [Int] = []
+    
     func viewDidLoad() {
         // get (fetch if needed) tasks from Todoist
         interactor.getTasks { (result) in
@@ -29,4 +34,5 @@ class DashboardPresentator: DashboardPresentatorDelegate {
             }
         }
     }
+    
 }
