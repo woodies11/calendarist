@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import SwiftDate
 
 protocol DashboardInteractorProtocol {
-    func getTasks(completion: @escaping NetworkCompletionHandler<[String]>)
+    func getTasks(completion: @escaping NetworkCompletionHandler<[Date: [String]]>)
 }
 
 class DashboardInteractor: DashboardInteractorProtocol {
@@ -20,17 +21,23 @@ class DashboardInteractor: DashboardInteractorProtocol {
         self.tdModule = todoistModule
     }
     
-    func getTasks(completion: @escaping NetworkCompletionHandler<[String]>) {
+    func getTasks(completion: @escaping NetworkCompletionHandler<[Date: [String]]>) {
         tdModule.getAllTasks() { (result) in
             switch result{
             case .success(let tdTasks):
-                var tasks: [String] = [String]()
+                var taskList: [Date: [String]] = [:]
                 for tdTask in tdTasks {
-                    if !tdTask.completed {
-                        tasks.append(tdTask.content)
+                    if tdTask.completed { continue }
+                    guard let dueDateTime = tdTask.due else { continue }
+                    
+                    let dueDateIgnoreTime = dueDateTime.date.startOfDay
+                    if taskList[dueDateIgnoreTime] == nil {
+                        taskList[dueDateIgnoreTime] = [String]()
                     }
+                    
+                    taskList[dueDateIgnoreTime]!.append(tdTask.content)
                 }
-                completion(.success(tasks))
+                completion(.success(taskList))
             case .error:
                 completion(.error)
             }

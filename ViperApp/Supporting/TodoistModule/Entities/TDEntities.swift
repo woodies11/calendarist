@@ -44,10 +44,11 @@ struct TDLabel: Comparable {
 }
 
 struct TDDue {
-    var datetime: NSDate!
+    var date: Date! // yyyy-MM-dd
+    var datetime: Date? // Todoist only return datetime (in RFC3339) if due time is set
     var recurring: Bool = false
     var string: String = ""
-    var timezone: String!
+    var timezone: String? // Todoist only return timezone if due time is set
 }
 
 struct TDTask: Comparable {
@@ -120,13 +121,48 @@ extension TDLabel: Mappable {
 extension TDDue: Mappable {
     init?(map: Map){}
     
+    static let datetimeTransform = TransformOf<Date, String>(fromJSON: { (due_datetime) -> Date? in
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard let due_datetime = due_datetime else {
+            return nil
+        }
+        return formatter.date(from: due_datetime)
+    }) { (datetime) -> String? in
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        guard let datetime = datetime else {
+            return nil
+        }
+        return formatter.string(from: datetime)
+    }
+    
+    static let dateTransform = TransformOf<Date, String>(fromJSON: { (due_datetime) -> Date? in
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let due_datetime = due_datetime else {
+            return nil
+        }
+        return formatter.date(from: due_datetime)
+    }) { (datetime) -> String? in
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        guard let datetime = datetime else {
+            return nil
+        }
+        return formatter.string(from: datetime)
+    }
+    
     mutating func mapping(map: Map) {
-        datetime <- map["datetime"]
+        date <- (map["date"], TDDue.dateTransform)
+        datetime <- (map["due_datetime"], TDDue.datetimeTransform)
         recurring <- map["recurring"]
         string <- map["string"]
         timezone <- map["timezone"]
     }
 }
+
+
 
 extension TDTask: Mappable {
     init?(map: Map){}

@@ -33,7 +33,6 @@ class DashboardRouter: DashboardRouterProtocol {
         
         // Create and assign the needed component to our ViewController
         let presentator = DashboardPresentator()
-        
         let interactor = DashboardInteractor(todoistModule: todoistModule)
         let router = DashboardRouter()
         

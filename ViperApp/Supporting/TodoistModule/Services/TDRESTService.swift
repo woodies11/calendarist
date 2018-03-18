@@ -77,7 +77,6 @@ class TDRESTService: TDRESTServiceProtocol {
         
         let request = Alamofire.request(TodolistAPI.tasks.url, headers: headers)
         request.responseArray { (response: DataResponse<[TDTask]>) in
-            debugPrint(request)
             guard let dataArray = response.result.value else {
                 completion(.error)
                 return

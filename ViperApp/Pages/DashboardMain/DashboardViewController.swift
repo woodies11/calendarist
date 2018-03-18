@@ -10,7 +10,7 @@ import UIKit
 import FSCalendar
 
 protocol DashboardViewControllerProtocol: AnyObject {
-    var taskList: [String] { get set }
+    var taskList: [Date: [String]] { get set }
     func showAlert(title: String, message: String)
 }
 
@@ -19,19 +19,23 @@ class DashboardViewController: UIViewController, DashboardViewControllerProtocol
     var presentator: DashboardPresentatorDelegate?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var calendar: FSCalendar!
     
     // Class variables
-    var taskList: [String] = [] {
+    var taskList: [Date: [String]] = [:] {
         didSet {
             tableView.reloadData()
+            calendar.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         presentator?.viewDidLoad()
+        
+        // Select the current date by default
+        calendar.select(Date())
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +52,16 @@ class DashboardViewController: UIViewController, DashboardViewControllerProtocol
 
 extension DashboardViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskList.count
+        var selectedDate = Date().startOfDay
+        if calendar.selectedDate != nil {
+            selectedDate = calendar.selectedDate!
+        }
+        
+        guard let dateTaskList = taskList[selectedDate] else {
+            return 0
+        }
+        
+        return dateTaskList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,12 +70,34 @@ extension DashboardViewController: UITableViewDataSource, UITableViewDelegate {
             // TODO: create a new cell and set instead
             return UITableViewCell()
         }
-        cell.textLabel?.text = taskList[indexPath.row]
+        
+        var selectedDate = Date().startOfDay
+        if calendar.selectedDate != nil {
+            selectedDate = calendar.selectedDate!
+        }
+        
+        guard let dateTaskList = taskList[selectedDate] else {
+            fatalError("Attempting to display empty date. TableView numberOfRowsInSection should return 0 so this func should not run.")
+        }
+        
+        cell.textLabel?.text = dateTaskList[indexPath.row]
         return cell
     }
     
 }
 
-extension DashboardViewController: FSCalendarDataSource, FSCalendarDelegate {
+extension DashboardViewController: FSCalendarDelegate {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        tableView.reloadData()
+    }
+}
+
+extension DashboardViewController: FSCalendarDelegateAppearance {
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        if let tasks = taskList[date.startOfDay] {
+            return UIColor(red: 1, green: min(1-0.2*CGFloat(tasks.count), 1), blue: 0, alpha: 1)
+        }
+        return UIColor.white
+    }
     
 }

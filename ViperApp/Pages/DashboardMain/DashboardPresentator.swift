@@ -21,8 +21,8 @@ class DashboardPresentator: DashboardPresentatorDelegate {
     func viewDidLoad() {
         interactor.getTasks { (result) in
             switch result{
-            case .success(let tasks):
-                self.view.taskList = tasks
+            case .success(let taskList):
+                self.view.taskList = taskList
             case .error:
                 self.view.showAlert(title: "Network Error!", message: "Cannot get tasks.")
             }
