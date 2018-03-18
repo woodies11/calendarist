@@ -10,7 +10,7 @@
 import UIKit
 
 protocol DashboardRouterProtocol: RouterProtocol {
-    static func createModule() -> UIViewController
+    static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
 }
 
 class DashboardRouter: DashboardRouterProtocol {
@@ -19,7 +19,7 @@ class DashboardRouter: DashboardRouterProtocol {
      create, bind, and initialize DashboardViewController
      @return UIViewController
      */
-    class func createModule() -> UIViewController {
+    class func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController {
         
         // Instantiate the NavController which we define in Main Storyboard.
         // This will also instantiate our DashboardViewController since the
@@ -27,15 +27,24 @@ class DashboardRouter: DashboardRouterProtocol {
         let navController = mainStoryboard.instantiateViewController(withIdentifier: "DashboardNavViewController")
         guard let dashboardViewController = navController.childViewControllers.first as? DashboardViewController
             else {
-                // TODO: throw an exception or something
+                // FIXME: should throw an exception or something
                 return UIViewController()
         }
         
-        // Create and assign the presentator to our ViewController
+        // Create and assign the needed component to our ViewController
         let presentator = DashboardPresentator()
+        
+        let interactor = DashboardInteractor(todoistModule: todoistModule)
+        let router = DashboardRouter()
+        
+        presentator.interactor = interactor
+        presentator.router = router
+        presentator.view = dashboardViewController
+        
         dashboardViewController.presentator = presentator
         
-        return dashboardViewController
+        // Don't forget that we do need the NavViewController
+        return navController
     }
 }
 

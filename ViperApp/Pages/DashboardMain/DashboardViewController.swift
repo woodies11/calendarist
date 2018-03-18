@@ -7,18 +7,25 @@
 //
 
 import UIKit
+import FSCalendar
 
-struct DashboardTask {
-    var content: String!
-    var due: NSDate!
+protocol DashboardViewControllerProtocol: AnyObject {
+    var taskList: [String] { get set }
+    func showAlert(title: String, message: String)
 }
 
-class DashboardViewController: UIViewController {
+class DashboardViewController: UIViewController, DashboardViewControllerProtocol {
 
-    var presentator: DashboardPresentatorProtocol?
+    var presentator: DashboardPresentatorDelegate?
+    
+    @IBOutlet weak var tableView: UITableView!
     
     // Class variables
-    var taskList: [DashboardTask] = []
+    var taskList: [String] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +38,15 @@ class DashboardViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func showAlert(title: String, message: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
-extension DashboardViewController: UITableViewDataSource {
+extension DashboardViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskList.count
     }
@@ -44,12 +57,12 @@ extension DashboardViewController: UITableViewDataSource {
             // TODO: create a new cell and set instead
             return UITableViewCell()
         }
-        cell.textLabel?.text = "Test \(indexPath.row)"
+        cell.textLabel?.text = taskList[indexPath.row]
         return cell
     }
     
 }
 
-extension DashboardViewController: UITableViewDelegate {
+extension DashboardViewController: FSCalendarDataSource, FSCalendarDelegate {
     
 }

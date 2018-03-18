@@ -17,6 +17,12 @@ protocol TDRESTServiceProtocol {
 
 class TDRESTService: TDRESTServiceProtocol {
     
+    // IMPORTANT: As of SE-0054, ImplicitlyUnwrappedOptional change to complier annotation only
+    // This mean that String! is allow to be treated as String but will ALWAYS be treated as String?
+    // with ever available.
+    // This make "token" interpolated as Optional("...") in our header which cause the request to fail.
+    //
+    // refer to: https://stackoverflow.com/a/39537558
     private var token: String!
     
     init(token: String) {
@@ -24,9 +30,9 @@ class TDRESTService: TDRESTServiceProtocol {
     }
     
     func getAllProjects(completion: @escaping (NetworkResult<[TDProject]>) -> Void) {
-        // Include the OAuth token
+        // Include the OAuth token4
         let headers = [
-            "Authorization": "Bearer \(token)"
+            "Authorization": "Bearer \(token!)"
         ]
         
         // Create a network request using Alamofire.
@@ -48,7 +54,7 @@ class TDRESTService: TDRESTServiceProtocol {
     func getAllLabels(completion: @escaping (NetworkResult<[TDLabel]>) -> Void) {
         
         let headers = [
-            "Authorization": "Bearer \(token)"
+            "Authorization": "Bearer \(token!)"
         ]
         
         Alamofire.request(TodolistAPI.labels.url, headers: headers).responseArray { (response: DataResponse<[TDLabel]>) in
@@ -66,10 +72,12 @@ class TDRESTService: TDRESTServiceProtocol {
         // TODO: Need to pass in Filters as well... but how to test?
         
         let headers = [
-            "Authorization": "Bearer \(token)"
+            "Authorization": "Bearer \(token!)"
         ]
         
-        Alamofire.request(TodolistAPI.tasks.url, headers: headers).responseArray { (response: DataResponse<[TDTask]>) in
+        let request = Alamofire.request(TodolistAPI.tasks.url, headers: headers)
+        request.responseArray { (response: DataResponse<[TDTask]>) in
+            debugPrint(request)
             guard let dataArray = response.result.value else {
                 completion(.error)
                 return

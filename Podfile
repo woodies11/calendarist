@@ -9,6 +9,7 @@ target 'ViperApp' do
 
   pod 'Alamofire', '~> 4.7'
   pod 'AlamofireObjectMapper', '~> 5.0'
+  pod 'FSCalendar'
 
   target 'ViperAppTests' do
     inherit! :search_paths

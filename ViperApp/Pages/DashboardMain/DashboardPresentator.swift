@@ -8,17 +8,24 @@
 
 import Foundation
 
-protocol DashboardPresentatorProtocol {
+protocol DashboardPresentatorDelegate {
     func viewDidLoad()
 }
 
-class DashboardPresentator: DashboardPresentatorProtocol {
+class DashboardPresentator: DashboardPresentatorDelegate {
     
-    weak var view: DashboardViewController?
+    weak var view: DashboardViewControllerProtocol!
     var interactor: DashboardInteractorProtocol!
     var router: DashboardRouterProtocol!
     
     func viewDidLoad() {
-        
+        interactor.getTasks { (result) in
+            switch result{
+            case .success(let tasks):
+                self.view.taskList = tasks
+            case .error:
+                self.view.showAlert(title: "Network Error!", message: "Cannot get tasks.")
+            }
+        }
     }
 }

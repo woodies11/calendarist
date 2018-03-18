@@ -24,6 +24,7 @@
 		4F5B5BD5205E520E00963A1C /* DashboardPresentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BD4205E520E00963A1C /* DashboardPresentator.swift */; };
 		4F5B5BDA205EAF1700963A1C /* NetworkEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BD9205EAF1700963A1C /* NetworkEntities.swift */; };
 		4F5B5BDC205EBC6400963A1C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BDB205EBC6400963A1C /* Router.swift */; };
+		4F5B5BDE205ED7A100963A1C /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BDD205ED7A100963A1C /* Entities.swift */; };
 		4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */; };
 		4F61E5F2205BFCB00030C4A3 /* TDEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */; };
 		4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7BB785205BC15100915911 /* LoginPageProtocols.swift */; };
@@ -62,6 +63,7 @@
 		4F5B5BD4205E520E00963A1C /* DashboardPresentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPresentator.swift; sourceTree = "<group>"; };
 		4F5B5BD9205EAF1700963A1C /* NetworkEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEntities.swift; sourceTree = "<group>"; };
 		4F5B5BDB205EBC6400963A1C /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		4F5B5BDD205ED7A100963A1C /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEndpoint.swift; sourceTree = "<group>"; };
 		4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEntities.swift; sourceTree = "<group>"; };
 		4F7BB785205BC15100915911 /* LoginPageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageProtocols.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		4F4B3754205AE22600660151 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				4F5B5BDD205ED7A100963A1C /* Entities.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -429,12 +432,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ViperApp/Pods-ViperApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,6 +479,7 @@
 				4F5B5BD5205E520E00963A1C /* DashboardPresentator.swift in Sources */,
 				4F4B3756205B74A000660151 /* TDOAuthService.swift in Sources */,
 				4F4B3724205AD6FC00660151 /* TDRESTService.swift in Sources */,
+				4F5B5BDE205ED7A100963A1C /* Entities.swift in Sources */,
 				4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */,
 				4F5B5BD3205E51E700963A1C /* DashboardInteractor.swift in Sources */,
 				4F5B5BDA205EAF1700963A1C /* NetworkEntities.swift in Sources */,

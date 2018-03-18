@@ -9,14 +9,31 @@
 import Foundation
 
 protocol DashboardInteractorProtocol {
-    func getTasks()
+    func getTasks(completion: @escaping NetworkCompletionHandler<[String]>)
 }
 
-class DashboardInteractor {
+class DashboardInteractor: DashboardInteractorProtocol {
     
-    var todoistModule: TodoistModuleProtocol!
+    var tdModule: TodoistModuleProtocol!
     
-    func getTasks() {
-        
+    init(todoistModule: TodoistModuleProtocol) {
+        self.tdModule = todoistModule
+    }
+    
+    func getTasks(completion: @escaping NetworkCompletionHandler<[String]>) {
+        tdModule.getAllTasks() { (result) in
+            switch result{
+            case .success(let tdTasks):
+                var tasks: [String] = [String]()
+                for tdTask in tdTasks {
+                    if !tdTask.completed {
+                        tasks.append(tdTask.content)
+                    }
+                }
+                completion(.success(tasks))
+            case .error:
+                completion(.error)
+            }
+        }
     }
 }

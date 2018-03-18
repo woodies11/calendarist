@@ -22,9 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewControlleripad : UIViewController!
         
-        
-        if tdModule.isAuthenticated() {
-            initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "DashboardNavViewController") as UIViewController
+        // TODO: remove this
+        if !tdModule.isAuthenticated() {
+            // If already have credential, show the Dashboard right away!
+            initialViewControlleripad = DashboardRouter.createModule(todoistModule: tdModule)
         } else {
             initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "ConnectPage") as UIViewController
         }

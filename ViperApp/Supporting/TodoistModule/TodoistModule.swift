@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TodoistModuleProtocol {
-    func getAllTasks(completion: NetworkResult<[TDTask]>)
+    func getAllTasks(completion: @escaping NetworkCompletionHandler<[TDTask]>)
 }
 
 class TodoistModule: TodoistModuleProtocol {
@@ -34,8 +34,12 @@ class TodoistModule: TodoistModuleProtocol {
         return token != nil
     }
     
-    func getAllTasks(completion: NetworkResult<[TDTask]>) {
-        
+    func getAllTasks(completion: @escaping NetworkCompletionHandler<[TDTask]>) {
+        if !isAuthenticated() {
+            // FIXME: should throw exception or redirect user to login page
+            authenticate()
+        }
+        tdSyncService.getTasks(withFilter: nil, completion: completion)
     }
     
     
