@@ -13,16 +13,6 @@ protocol DashboardRouterProtocol: RouterProtocol {
     static func createModule() -> UIViewController
 }
 
-protocol RouterProtocol {
-    static var mainStoryboard: UIStoryboard { get }
-}
-
-extension RouterProtocol {
-    static var mainStoryboard: UIStoryboard {
-        return UIStoryboard(name: "Main", bundle: Bundle.main)
-    }
-}
-
 class DashboardRouter: DashboardRouterProtocol {
     
     class func createModule() -> UIViewController {

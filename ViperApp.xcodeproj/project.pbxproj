@@ -23,6 +23,7 @@
 		4F5B5BD3205E51E700963A1C /* DashboardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BD2205E51E700963A1C /* DashboardInteractor.swift */; };
 		4F5B5BD5205E520E00963A1C /* DashboardPresentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BD4205E520E00963A1C /* DashboardPresentator.swift */; };
 		4F5B5BDA205EAF1700963A1C /* NetworkEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BD9205EAF1700963A1C /* NetworkEntities.swift */; };
+		4F5B5BDC205EBC6400963A1C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BDB205EBC6400963A1C /* Router.swift */; };
 		4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */; };
 		4F61E5F2205BFCB00030C4A3 /* TDEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */; };
 		4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7BB785205BC15100915911 /* LoginPageProtocols.swift */; };
@@ -60,6 +61,7 @@
 		4F5B5BD2205E51E700963A1C /* DashboardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInteractor.swift; sourceTree = "<group>"; };
 		4F5B5BD4205E520E00963A1C /* DashboardPresentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPresentator.swift; sourceTree = "<group>"; };
 		4F5B5BD9205EAF1700963A1C /* NetworkEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEntities.swift; sourceTree = "<group>"; };
+		4F5B5BDB205EBC6400963A1C /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEndpoint.swift; sourceTree = "<group>"; };
 		4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEntities.swift; sourceTree = "<group>"; };
 		4F7BB785205BC15100915911 /* LoginPageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageProtocols.swift; sourceTree = "<group>"; };
@@ -177,7 +179,6 @@
 		4F4B3722205AD6B600660151 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				4F5B5BD8205EAF0500963A1C /* Common */,
 				4F28642A205BA37E0073FFA5 /* TodoistModule */,
 			);
 			path = Supporting;
@@ -199,17 +200,11 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		4F5B5BD8205EAF0500963A1C /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				4F5B5BD9205EAF1700963A1C /* NetworkEntities.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		4F61E5EE205BF7EA0030C4A3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4F5B5BD9205EAF1700963A1C /* NetworkEntities.swift */,
+				4F5B5BDB205EBC6400963A1C /* Router.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -482,6 +477,7 @@
 				4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */,
 				4F5B5BD3205E51E700963A1C /* DashboardInteractor.swift in Sources */,
 				4F5B5BDA205EAF1700963A1C /* NetworkEntities.swift in Sources */,
+				4F5B5BDC205EBC6400963A1C /* Router.swift in Sources */,
 				4F5B5BD1205E51CE00963A1C /* DashboardViewController.swift in Sources */,
 				4F5B5BCD205E519700963A1C /* DashboardRouter.swift in Sources */,
 				4F3C755E205AA5AF0088E189 /* AppDelegate.swift in Sources */,

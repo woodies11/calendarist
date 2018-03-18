@@ -6,11 +6,8 @@
 //  Copyright © 2018 RWP. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 import AlamofireObjectMapper
-
-
 
 protocol TDRESTServiceProtocol {
     func getAllProjects(completion: @escaping NetworkCompletionHandler<[TDProject]>)
