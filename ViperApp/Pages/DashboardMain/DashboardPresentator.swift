@@ -19,12 +19,13 @@ class DashboardPresentator: DashboardPresentatorDelegate {
     var router: DashboardRouterProtocol!
     
     func viewDidLoad() {
+        // get (fetch if needed) tasks from Todoist
         interactor.getTasks { (result) in
             switch result{
             case .success(let taskList):
                 self.view.taskList = taskList
             case .error:
-                self.view.showAlert(title: "Network Error!", message: "Cannot get tasks.")
+                self.view.showAlert(title: "Oops...", message: "Cannot get tasks.")
             }
         }
     }
