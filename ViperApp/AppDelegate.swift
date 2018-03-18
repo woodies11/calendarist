@@ -18,9 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let tdModule = TodoistModule()
-        tdModule.getAllProjects(error: nil) { (result) in
-            print(result)
-        }
         
         let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewControlleripad : UIViewController!

@@ -8,7 +8,11 @@
 
 import Foundation
 
-class TodoistModule {
+protocol TodoistModuleProtocol {
+    func getAllTasks(completion: NetworkResult<[TDTask]>)
+}
+
+class TodoistModule: TodoistModuleProtocol {
     
     var token: String?
     
@@ -26,27 +30,13 @@ class TodoistModule {
         }
     }
     
-    func getAllProjects(error: ((AnyObject?) -> Void)?, success: @escaping ([String]) -> Void) {
-        
-        if !isAuthenticated() {
-            authenticate()
-        }
-        
-//        tdSyncService.getAllProjects() { (result) in
-//            var projects = [String]()
-//            for project in result {
-//                projects.append(project.name)
-//            }
-//            
-//            success(projects)
-//        }
-    }
-    
     func isAuthenticated() -> Bool {
         return token != nil
     }
     
-    
+    func getAllTasks(completion: NetworkResult<[TDTask]>) {
+        
+    }
     
     
 }
