@@ -20,10 +20,14 @@ class FilterListInteractor: FilterListInteractorProtocol {
     
     var todoistModule: TodoistModuleProtocol!
     
+    // TODO: Find a better way to do Dependency Injection
     init(todoistModule: TodoistModuleProtocol) {
         self.todoistModule = todoistModule
     }
     
+    /// A utility function to filter out only Filters of certain type.
+    /// Because we store all type of Filter together in one list,
+    /// use this to generate a list containing only the requested FilterType.
     private class func filterListBy(filterType type: FilterType, list: [Filter]) -> [Filter] {
         var tmpList: [Filter] = []
         for filter in list {
