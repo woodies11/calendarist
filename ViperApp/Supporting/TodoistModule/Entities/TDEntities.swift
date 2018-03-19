@@ -60,7 +60,7 @@ struct TDTask: Comparable {
     var order: Int!
     var priority: Int!
     var project_id: Int!
-    var label_ids: [Int] = [Int]()
+    var label_ids: [Int]! = []
     var url: String!
     
     static func <(lhs: TDTask, rhs: TDTask) -> Bool {
@@ -74,8 +74,8 @@ struct TDTask: Comparable {
 }
 
 struct TDFilter {
-    var project_id: Int?
-    var label_id: [Int]?
+    var project_id: Set<Int>?
+    var label_id: Set<Int>?
     var filter: String?
     var lang: String?
 }

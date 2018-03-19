@@ -24,10 +24,15 @@ class DashboardPresentator: DashboardPresentatorDelegate {
     // Will fetch all if empty.
     var projectToShow: [Int] = []
     var labelToShow: [Int] = []
+    var currentFilters: [Filter]?
     
     func viewDidLoad() {
         // get (fetch if needed) tasks from Todoist
-        interactor.getTasks { (result) in
+        reloadView()
+    }
+    
+    private func reloadView() {
+        interactor.getTasks(withFilters: currentFilters) { (result) in
             switch result{
             case .success(let taskList):
                 self.view.taskList = taskList
@@ -44,11 +49,12 @@ class DashboardPresentator: DashboardPresentatorDelegate {
         // What is currently being selected
         // If this is nil, FilterList will
         // fetech a new list.
-        router.presentFilterList(initial: interactor.currentFilter)
+        router.presentFilterList(initial: currentFilters)
     }
     
     func filterUpdated(filters: [Filter]) {
-        print("Filter Updated")
+        self.currentFilters = filters
+        reloadView()
     }
     
 }

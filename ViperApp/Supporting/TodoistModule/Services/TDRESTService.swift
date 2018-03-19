@@ -12,7 +12,7 @@ import AlamofireObjectMapper
 protocol TDRESTServiceProtocol {
     func getAllProjects(completion: @escaping NetworkCompletionHandler<[TDProject]>)
     func getAllLabels(completion: @escaping NetworkCompletionHandler<[TDLabel]>)
-    func getTasks(withFilter filters: TDFilter?, completion: @escaping NetworkCompletionHandler<[TDTask]>)
+    func getTasks(withFilter filter: TDFilter?, completion: @escaping NetworkCompletionHandler<[TDTask]>)
 }
 
 class TDRESTService: TDRESTServiceProtocol {
@@ -67,9 +67,7 @@ class TDRESTService: TDRESTServiceProtocol {
         
     }
     
-    func getTasks(withFilter filters: TDFilter?, completion: @escaping (NetworkResult<[TDTask]>) -> Void) {
-        
-        // TODO: Need to pass in Filters as well... but how to test?
+    func getTasks(withFilter filter: TDFilter?, completion: @escaping (NetworkResult<[TDTask]>) -> Void) {
         
         let headers = [
             "Authorization": "Bearer \(token!)"
@@ -77,11 +75,75 @@ class TDRESTService: TDRESTServiceProtocol {
         
         let request = Alamofire.request(TodolistAPI.tasks.url, headers: headers)
         request.responseArray { (response: DataResponse<[TDTask]>) in
+            // Fetch ALL tasks from TodoistAPI
+            
             guard let dataArray = response.result.value else {
                 completion(.error)
                 return
             }
-            completion(.success(dataArray))
+            
+            // If a filter is given, do filtering here.
+            // --------------------
+            // NOTE: Originally, we intended to use Todoist own API
+            // to do the filtering. However, the current REST API
+            // only allow querying ALL or ONE Project each time so
+            // if we need multiple projects, we will have to do
+            // multiple network request and do dispatchGroup, etc.
+            //
+            // Furthermore, the filter string option requried the user
+            // to be a paid user in order to utilise.
+            //
+            // Also by the nature of this app, most will likely query
+            // a lot of projects and only leave a few the burden of tasks
+            // filtering is decided to be implemented in the FrontEnd.
+            
+            if let filters = filter {
+                guard let project_id = filters.project_id else {
+                    // If we weren't able to get list of project to show,
+                    // simply show all.
+                    completion(.success(dataArray))
+                    return
+                }
+                
+                let label_id = filters.label_id
+                
+                // Create a temporary array
+                var tmpTasks: [TDTask] = []
+                for task in dataArray {
+                    
+                    if !project_id.contains(task.project_id) {
+                        // If the task is not in the list of
+                        // project to show then simply skip it
+                        continue
+                    }
+                    
+                    if let label_id = label_id {
+                        // If no label is selected, we will show
+                        // all tasks.
+                        if label_id.count <= 0 { continue }
+                        
+                        // If at least one label is selected:
+                        // We will only show tasks that have the labels
+                        // that the user selected. Since labels and tasks
+                        // have a many-to-many relationship, we find
+                        // the set intersection between the two.
+                        //
+                        // If the intersection is empty (count <= 0),
+                        // the task has no labels which we want to show.
+                        if label_id.intersection(task.label_ids).count <= 0 {
+                            continue
+                        }
+                        
+                    }
+                    // If all else passed, we add this task to the list
+                    // which we want to return.
+                    tmpTasks.append(task)
+                }
+                completion(.success(tmpTasks))
+                
+            } else {
+                completion(.success(dataArray))
+            }
         }
         
     }

@@ -12,17 +12,18 @@ import Foundation
 
 protocol FilterListInteractorProtocol {
     func getFilterList(type: FilterType, completion: @escaping NetworkCompletionHandler<[Filter]>)
-    var localFiltersList: [Filter]! { get }
+    var localFiltersList: [Filter]? { get }
 }
 
 class FilterListInteractor: FilterListInteractorProtocol {
     
-    var localFiltersList: [Filter]!
+    var localFiltersList: [Filter]?
     
     var todoistModule: TodoistModuleProtocol!
     
     // TODO: Find a better way to do Dependency Injection
-    init(todoistModule: TodoistModuleProtocol) {
+    init(initial filters: [Filter]?, todoistModule: TodoistModuleProtocol) {
+        self.localFiltersList = filters
         self.todoistModule = todoistModule
     }
     
@@ -32,7 +33,7 @@ class FilterListInteractor: FilterListInteractorProtocol {
     private class func filterListBy(filterType type: FilterType, list: [Filter]) -> [Filter] {
         var tmpList: [Filter] = []
         for filter in list {
-            if filter.type == type {
+            if filter.filterType == type {
                 tmpList.append(filter)
             }
         }
@@ -43,7 +44,7 @@ class FilterListInteractor: FilterListInteractorProtocol {
         
         // If already fetched, return locally stored data.
         // TODO: This has no "cache time policy" at all
-        // so if the user never leave this page and come back,
+        // so if the user never leave this app and come back,
         // The list may never be updated! -> not much of a
         // concern at this point as we don't expect many people,
         // if any, to do something like that. Will add if have
@@ -115,8 +116,8 @@ class FilterListInteractor: FilterListInteractorProtocol {
                 switch result{
                 case .success(let labels):
                     for label in labels {
-                        // The default option is everything selected
-                        labelFilters.append(Filter(id: label.id, name: label.name, selected: true, type: .Label))
+                        // The default option is every label NOT selected
+                        labelFilters.append(Filter(id: label.id, name: label.name, selected: false, type: .Label))
                     }
                 case .error: ()
                 completion(.error)

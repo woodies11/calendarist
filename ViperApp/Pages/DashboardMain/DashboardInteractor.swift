@@ -10,24 +10,43 @@ import Foundation
 import SwiftDate
 
 protocol DashboardInteractorProtocol {
-    var currentFilter: [String: [Filter]]? { get set }
-    func getTasks(completion: @escaping NetworkCompletionHandler<[Date: [String]]>)
+    func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>)
 }
 
 class DashboardInteractor: DashboardInteractorProtocol {
     
     var tdModule: TodoistModuleProtocol!
     
-    // In case a filter present is currently applied,
-    // we want to store it here.
-    var currentFilter: [String: [Filter]]?
-    
     init(todoistModule: TodoistModuleProtocol) {
         self.tdModule = todoistModule
     }
     
-    func getTasks(completion: @escaping NetworkCompletionHandler<[Date: [String]]>) {
-        tdModule.getAllTasks() { (result) in
+    func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>) {
+        
+        var tdFilter: TDFilter?
+        
+        if let filters = filters {
+            
+            var project_id: Set<Int> = []
+            var label_id: Set<Int> = []
+            
+            for filter in filters {
+                if !filter.selected { continue }
+                
+                switch filter.filterType! {
+                case .Label:
+                    label_id.insert(filter.id)
+                case .Project:
+                    project_id.insert(filter.id)
+                }
+                
+                tdFilter = TDFilter(project_id: project_id, label_id: label_id, filter: nil, lang: nil)
+                
+                
+            }
+        }
+        
+        tdModule.getTasks(withFilter: tdFilter) { (result) in
             switch result{
             case .success(let tdTasks):
                 let taskList = self.generateTaskList(tdTasks)
