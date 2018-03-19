@@ -23,6 +23,8 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        print("FilterList did load")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,4 +32,14 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+extension FilterListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
 }

@@ -17,7 +17,7 @@ struct Filter {
 
 protocol FilterListRouterProtocol: RouterProtocol {
     static func createModule(filterList: [String: [Filter]]) -> UIViewController
-    func dismissView()
+    static func configureModule(navigationController view: UIViewController, filterList: [String: [Filter]])
 }
 
 class FilterListRouter: FilterListRouterProtocol {
@@ -28,7 +28,14 @@ class FilterListRouter: FilterListRouterProtocol {
         // This will also instantiate our FilterListViewController since the
         // NavController have the view as its RootViewController.
         let navController = mainStoryboard.instantiateViewController(withIdentifier: "FilterNavController")
-        guard let filterListViewController = navController.childViewControllers.first as? FilterListViewController
+        FilterListRouter.configureModule(navigationController: navController, filterList: filterList)
+        
+        return navController
+    }
+    
+    class func configureModule(navigationController view: UIViewController, filterList: [String: [Filter]]) {
+        
+        guard let filterListViewController = view.childViewControllers.first as? FilterListViewController
             else {
                 fatalError("Unable to get FilterListViewController!")
         }
@@ -43,10 +50,8 @@ class FilterListRouter: FilterListRouterProtocol {
         presentator.view = filterListViewController
         filterListViewController.presentator = presentator
         
-        return filterListViewController
     }
     
-    func dismissView() {
-        
-    }
+    
+    
 }

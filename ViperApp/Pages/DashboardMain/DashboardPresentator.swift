@@ -10,6 +10,7 @@ import Foundation
 
 protocol DashboardPresentatorDelegate {
     func viewDidLoad()
+    func onFilterButtonTapped()
 }
 
 class DashboardPresentator: DashboardPresentatorDelegate {
@@ -33,6 +34,9 @@ class DashboardPresentator: DashboardPresentatorDelegate {
                 self.view.showAlert(title: "Oops...", message: "Cannot get tasks.")
             }
         }
+    }
+    
+    func onFilterButtonTapped() {
     }
     
 }

@@ -157,14 +157,14 @@
                     <navigationItem key="navigationItem" title="TD Dashboard" id="j7a-UV-R84">
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="r2P-ic-n43">
                             <connections>
-                                <action selector="onFilterButtonTapped:" destination="mE6-zv-uVQ" id="nth-vr-r6q"/>
+                                <action selector="onFilterButtonTapped:" destination="mE6-zv-uVQ" id="8Xq-po-tJ6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendar" destination="le8-H8-AwW" id="Zd1-6B-ekd"/>
                         <outlet property="tableView" destination="Agf-36-gdi" id="u9j-aO-v2e"/>
-                        <segue destination="ujz-qd-6bs" kind="presentation" id="pgC-Ac-Oo6"/>
+                        <segue destination="ujz-qd-6bs" kind="presentation" identifier="FilterListSegue" id="pgC-Ac-Oo6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLn-IJ-z4V" userLabel="First Responder" sceneMemberID="firstResponder"/>

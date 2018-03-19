@@ -12,6 +12,7 @@ import FSCalendar
 protocol DashboardViewControllerProtocol: AnyObject {
     var taskList: [Date: [String]] { get set }
     func showAlert(title: String, message: String)
+    func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
 }
 
 class DashboardViewController: UIViewController, DashboardViewControllerProtocol {
@@ -32,9 +33,24 @@ class DashboardViewController: UIViewController, DashboardViewControllerProtocol
             calendar.reloadData()
         }
     }
-
+    
     @IBAction func onFilterButtonTapped(_ sender: Any) {
-        
+        presentator?.onFilterButtonTapped()
+        self.performSegue(withIdentifier: "FilterListSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier! {
+        case "FilterListSegue":
+            let navController = segue.destination
+            FilterListRouter.configureModule(navigationController: navController, filterList: [:])
+        default: ()
+        }
+    }
+    
+    func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        self.dismiss(animated: true, completion: nil)
+        self.present(viewControllerToPresent, animated: animated, completion: completion)
     }
     
     override func viewDidLoad() {

@@ -11,7 +11,6 @@ import UIKit
 
 protocol DashboardRouterProtocol: RouterProtocol {
     static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
-    func presentFilterList()
 }
 
 class DashboardRouter: DashboardRouterProtocol {
@@ -43,10 +42,6 @@ class DashboardRouter: DashboardRouterProtocol {
         
         // Don't forget that we do need the NavViewController
         return navController
-    }
-    
-    func presentFilterList() {
-        
     }
 }
 
