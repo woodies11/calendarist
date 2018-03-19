@@ -29,11 +29,8 @@ class FilterListPresentator: FilterListPresentatorDelegate {
             case .error:
                 () // TODO: show alert
             case .success(let filterList):
-                var mutableFilterList: [String: NSMutableArray] = [:]
-                for dict in filterList {
-                    mutableFilterList[dict.key] = NSMutableArray(array: dict.value)
-                }
-                self.view.filterList = mutableFilterList
+                self.view.filterList = filterList
+                self.view.reloadView()
             }
         }
     }

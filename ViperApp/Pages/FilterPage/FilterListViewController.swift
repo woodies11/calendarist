@@ -9,7 +9,8 @@
 import UIKit
 
 protocol FilterListViewControllerProtocol: AnyObject {
-    var filterList: [String: NSMutableArray]! { get set }
+    var filterList: [String: [Filter]]! { get set }
+    func reloadView()
 }
 
 class FilterListViewController: UIViewController, FilterListViewControllerProtocol {
@@ -19,11 +20,7 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
-    var filterList: [String: NSMutableArray]! = [:] {
-        didSet {
-            self.reloadView()
-        }
-    }
+    var filterList: [String: [Filter]]! = [:]
     
     var segmentKey: [Int: String] = [:]
     
@@ -88,7 +85,7 @@ extension FilterListViewController: UITableViewDelegate, UITableViewDataSource {
             cell = UITableViewCell()
         }
         
-        let filter = filters[indexPath.row] as! Filter
+        let filter = filters[indexPath.row]
         
         cell!.textLabel?.text = filter.name
         if filter.selected {
@@ -100,14 +97,16 @@ extension FilterListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var filter = filterList[segmentKey[segmentControl.selectedSegmentIndex]!]![indexPath.row] as! Filter
-        filter.selected = !filter.selected
+        var filters = filterList[segmentKey[segmentControl.selectedSegmentIndex]!]!
+        filters[indexPath.row].selected = !filters[indexPath.row].selected
         
         let cell = tableView.cellForRow(at: indexPath)
-        if filter.selected {
+        if filters[indexPath.row].selected {
             cell!.accessoryType = .checkmark
         } else {
             cell!.accessoryType = .none
         }
+        
+        filterList[segmentKey[segmentControl.selectedSegmentIndex]!]! = filters
     }
 }
