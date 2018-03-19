@@ -11,6 +11,7 @@ import Foundation
 protocol DashboardPresentatorDelegate {
     func viewDidLoad()
     func onFilterButtonTapped()
+    func updateFilterList(filterList: [String: [Filter]])
 }
 
 class DashboardPresentator: DashboardPresentatorDelegate {
@@ -37,6 +38,15 @@ class DashboardPresentator: DashboardPresentatorDelegate {
     }
     
     func onFilterButtonTapped() {
+        let filterList: [String: [Filter]] = [
+            "Projects": [],
+            "Labels": []
+        ]
+        router.presentFilterList(filterList: filterList)
+    }
+    
+    func updateFilterList(filterList: [String: [Filter]]) {
+        print("Filter Updated")
     }
     
 }

@@ -9,11 +9,16 @@
 import Foundation
 
 protocol FilterListPresentatorDelegate {
-    
+    func onDoneTapped(returning filterList: [String: [Filter]])
 }
 
 class FilterListPresentator: FilterListPresentatorDelegate {
+    
     weak var view: FilterListViewControllerProtocol!
     var interactor: FilterListInteractorProtocol!
     var router: FilterListRouterProtocol!
+    
+    func onDoneTapped(returning filterList: [String: [Filter]]) {
+        router.dismiss(filterList: filterList)
+    }
 }

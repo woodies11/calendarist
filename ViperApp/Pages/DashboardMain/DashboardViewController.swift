@@ -36,16 +36,6 @@ class DashboardViewController: UIViewController, DashboardViewControllerProtocol
     
     @IBAction func onFilterButtonTapped(_ sender: Any) {
         presentator?.onFilterButtonTapped()
-        self.performSegue(withIdentifier: "FilterListSegue", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier! {
-        case "FilterListSegue":
-            let navController = segue.destination
-            FilterListRouter.configureModule(navigationController: navController, filterList: [:])
-        default: ()
-        }
     }
     
     func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?) {
@@ -149,5 +139,4 @@ extension DashboardViewController: FSCalendarDelegateAppearance {
         }
         return UIColor.white
     }
-    
 }

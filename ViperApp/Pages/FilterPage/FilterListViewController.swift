@@ -19,17 +19,42 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
+    var filterList: [String: [Filter]] = [:] {
+        didSet {
+            self.reloadView()
+        }
+    }
+    
+    @IBAction func onDoneTapped(_ sender: Any) {
+        presentator?.onDoneTapped(returning: filterList)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        print("FilterList did load")
+        self.reloadView()
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func reloadView() {
+        // Prevent trying to access the view before view loaded
+        // When we first set filterList for the first time, the view
+        // may not yet shown to the user so these UI elements are
+        // still nil
+        if let segmentControl = segmentControl {
+            segmentControl.removeAllSegments()
+            var count = 0
+            for filterType in filterList {
+                segmentControl.insertSegment(withTitle: filterType.key, at: count, animated: false)
+                count += 1
+            }
+        }
     }
 
 }

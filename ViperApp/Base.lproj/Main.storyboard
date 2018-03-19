@@ -185,6 +185,7 @@
                                     <segment title="First"/>
                                     <segment title="Second"/>
                                 </segments>
+                                <color key="tintColor" red="0.7991289496421814" green="0.14242991805076599" blue="0.21944716572761536" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UEm-eb-Lyp">
                                 <rect key="frame" x="0.0" y="122" width="375" height="545"/>
@@ -226,7 +227,11 @@
                         <viewLayoutGuide key="safeArea" id="oMZ-Ft-pBs"/>
                     </view>
                     <navigationItem key="navigationItem" id="CU2-Z0-Eyp">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Q4p-Ni-0vW"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Q4p-Ni-0vW">
+                            <connections>
+                                <action selector="onDoneTapped:" destination="tjI-He-TBI" id="cLl-dY-W9e"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentControl" destination="rAM-xf-n4q" id="bi5-6J-aMl"/>

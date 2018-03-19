@@ -11,9 +11,14 @@ import UIKit
 
 protocol DashboardRouterProtocol: RouterProtocol {
     static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
+    func presentFilterList(filterList: [String: [Filter]])
 }
 
 class DashboardRouter: DashboardRouterProtocol {
+    
+    // Hold reference to view for Segue and other navigation function.
+    weak var view: UIViewController!
+    var presentator: DashboardPresentatorDelegate!
     
     /**
      create, bind, and initialize DashboardViewController
@@ -30,7 +35,7 @@ class DashboardRouter: DashboardRouterProtocol {
                 fatalError("Unable to get DashboardViewController")
         }
         
-        // Create and assign the needed component to our ViewController
+        // Create and assign the needed component in our VIPER module
         let presentator = DashboardPresentator()
         let interactor = DashboardInteractor(todoistModule: todoistModule)
         let router = DashboardRouter()
@@ -38,10 +43,24 @@ class DashboardRouter: DashboardRouterProtocol {
         presentator.interactor = interactor
         presentator.router = router
         presentator.view = dashboardViewController
+        
+        router.view = dashboardViewController
+        router.presentator = presentator
+        
         dashboardViewController.presentator = presentator
         
         // Don't forget that we do need the NavViewController
         return navController
+    }
+    
+    func presentFilterList(filterList: [String: [Filter]]) {
+        FilterListRouter.presentModally(targetView: view, filterList: filterList, delegate: self)
+    }
+}
+
+extension DashboardRouter: FilterListModuleDelegate {
+    func onFilterListReturnWithFilterOptions(filterList: [String : [Filter]]) {
+        presentator?.updateFilterList(filterList: filterList)
     }
 }
 
