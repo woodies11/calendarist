@@ -8,11 +8,15 @@
 
 import Foundation
 
+
+
 protocol FilterListInteractorProtocol {
-    func getFilterList(completion: @escaping NetworkCompletionHandler<[String: [Filter]]>)
+    func getFilterList(type: FilterType, completion: @escaping NetworkCompletionHandler<[Filter]>)
 }
 
 class FilterListInteractor: FilterListInteractorProtocol {
+    
+    var localFiltersList: [Filter]!
     
     var todoistModule: TodoistModuleProtocol!
     
@@ -20,50 +24,124 @@ class FilterListInteractor: FilterListInteractorProtocol {
         self.todoistModule = todoistModule
     }
     
-    func getFilterList(completion: @escaping (NetworkResult<[String : [Filter]]>) -> Void) {
+    private class func filterListBy(filterType type: FilterType, list: [Filter]) -> [Filter] {
+        var tmpList: [Filter] = []
+        for filter in list {
+            if filter.type == type {
+                tmpList.append(filter)
+            }
+        }
+        return tmpList
+    }
+    
+    func getFilterList(type: FilterType, completion: @escaping (NetworkResult<[Filter]>) -> Void) {
         
-        var filterList: [String: [Filter]] = [:]
+        // If already fetched, return locally stored data.
+        // TODO: This has no "cache time policy" at all
+        // so if the user never leave this page and come back,
+        // The list may never be updated! -> not much of a
+        // concern at this point as we don't expect many people,
+        // if any, to do something like that. Will add if have
+        // time.
+        if let localFiltersList = self.localFiltersList {
+            let list = FilterListInteractor.filterListBy(filterType: type, list: localFiltersList)
+            completion(.success(list))
+            return
+        }
         
-        let dispatchGroup: DispatchGroup = DispatchGroup()
+        // Prevent multiple thread trying to access the filterList
+        // at the same time, thereby fetching them from the network
+        // many time and overwrite each other.
+        // --------
+        // We rely on the list being a list of Mutable Reference type
+        // to keep the selection state. If the list is overwritten,
+        // we will loss all of the current user selected state!
+        DispatchQueue.main.async {
+            // If data loaded while waiting for the previous queue,
+            // return the data right away.
+            if let localFiltersList = self.localFiltersList {
+                let list = FilterListInteractor.filterListBy(filterType: type, list: localFiltersList)
+                completion(.success(list))
+                return
+            }
         
-        dispatchGroup.enter()
-        todoistModule.getAllProjects { (result) in
-            var projectFilters: [Filter] = []
-            switch result{
-            case .success(let projects):
-                for project in projects {
-                    // The default option is everything selected
-                    projectFilters.append(Filter(id: project.id, name: project.name, selected: true))
-                }
-            case .error: ()
+            // We want to fetch both labels and projects
+            // at the same time so there is no delay when
+            // switching page.
+            
+            // Since we merge both type of filters into
+            // one list when storing, we need both network
+            // request to finish before setting our local
+            // filter list.
+            let dispatchGroup = DispatchGroup()
+            var tmpFilterList: [Filter] = []
+            
+            dispatchGroup.enter()
+            self.todoistModule.getAllProjects { (result) in
+                var projectFilters: [Filter] = []
+                switch result{
+                case .success(let projects):
+                    for project in projects {
+                        // The default option is everything selected
+                        projectFilters.append(Filter(id: project.id, name: project.name, selected: true, type: .Project))
+                    }
+                case .error: ()
                 completion(.error)
+                }
+                
+                // If this is the requested type, simply
+                // return it to the presentor first so
+                // it can display the list while we
+                // wait for the other one.
+                if type == .Project {
+                    completion(.success(projectFilters))
+                }
+                
+                // Append the list of projects to our tmp
+                // and tell dispatchGroup that this block
+                // is completed.
+                tmpFilterList += projectFilters
+                dispatchGroup.leave()
             }
             
-            filterList["Projects"] = projectFilters
-            dispatchGroup.leave()
-        }
-        
-        dispatchGroup.enter()
-        todoistModule.getAllLabels { (result) in
-            var labelFilters: [Filter] = []
-            switch result{
-            case .success(let labels):
-                for label in labels {
-                    // The default option is everything selected
-                    labelFilters.append(Filter(id: label.id, name: label.name, selected: true))
-                }
-            case .error: ()
+            dispatchGroup.enter()
+            self.todoistModule.getAllLabels { (result) in
+                var labelFilters: [Filter] = []
+                switch result{
+                case .success(let labels):
+                    for label in labels {
+                        // The default option is everything selected
+                        labelFilters.append(Filter(id: label.id, name: label.name, selected: true, type: .Label))
+                    }
+                case .error: ()
                 completion(.error)
+                }
+                
+                
+                // If this is the requested type, simply
+                // return it to the presentor first so
+                // it can display the list while we
+                // wait for the other one.
+                if type == .Label {
+                    completion(.success(labelFilters))
+                }
+                
+                // Append the list of labels to our tmp
+                // and tell dispatchGroup that this block
+                // is completed.
+                tmpFilterList += labelFilters
+                dispatchGroup.leave()
             }
             
-            filterList["Labels"] = labelFilters
-            dispatchGroup.leave()
+            dispatchGroup.notify(queue: .main) {
+                // Once both network request is finished,
+                // we would already have both the list of
+                // projects and the list of labels
+                // in our tmpFilterList. We can then store
+                // this in our localFilterList
+                self.localFiltersList = tmpFilterList
+            }
         }
-        
-        dispatchGroup.notify(queue: .main) {
-            completion(.success(filterList))
-        }
-        
     }
     
     

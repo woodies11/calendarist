@@ -10,10 +10,28 @@ import UIKit
 
 /// A Plain Old Swift Object
 /// Data Transfer Object for Filters.
-struct Filter {
+class Filter: Equatable {
     var id: Int!
     var name: String!
     var selected: Bool!
+    var type: FilterType!
+    
+    static func ==(lhs: Filter, rhs: Filter) -> Bool {
+        return lhs.type == rhs.type && lhs.id == rhs.id
+    }
+    
+    init(id: Int, name: String, selected: Bool, type: FilterType) {
+        self.id = id
+        self.name = name
+        self.selected = selected
+        self.type = type
+    }
+    
+}
+
+enum FilterType: Int {
+    case Project = 0
+    case Label = 1
 }
 
 protocol FilterListRouterProtocol: RouterProtocol {

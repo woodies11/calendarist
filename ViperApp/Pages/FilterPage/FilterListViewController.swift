@@ -9,34 +9,42 @@
 import UIKit
 
 protocol FilterListViewControllerProtocol: AnyObject {
-    var filterList: [String: [Filter]]! { get set }
-    func reloadView()
+    var filters: [Filter] { get set }
+}
+
+protocol FilterListViewDelegate {
+    func viewDidLoad()
+    func onDoneTapped()
+    func onSegmentChange(to page: FilterType)
 }
 
 class FilterListViewController: UIViewController, FilterListViewControllerProtocol {
     
-    var presentator: FilterListPresentatorDelegate?
+    var presentator: FilterListViewDelegate?
 
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
-    var filterList: [String: [Filter]]! = [:]
+    var filters: [Filter] = [] {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
     
-    var segmentKey: [Int: String] = [:]
-    
-    @IBAction func onSegmentChanged(_ sender: Any) {
-        tableView.reloadData()
+    @IBAction func onSegmentChanged(_ sender: UISegmentedControl) {
+        guard let page = FilterType(rawValue: sender.selectedSegmentIndex) else {
+            fatalError("Unknown Segment Selected.")
+        }
+        presentator?.onSegmentChange(to: page)
     }
     
     @IBAction func onDoneTapped(_ sender: Any) {
-//        presentator?.onDoneTapped(returning: filterList)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         presentator?.viewDidLoad()
-        self.reloadView()
         
     }
 
@@ -44,50 +52,18 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func reloadView() {
-        // "if let" prevent trying to access the view before view loaded
-        // When we first set filterList for the first time, the view
-        // may not yet shown to the user so these UI elements are
-        // still nil
-        if let segmentControl = segmentControl {
-            segmentControl.removeAllSegments()
-            var count = 0
-            for filterType in filterList {
-                segmentKey[count] = filterType.key
-                segmentControl.insertSegment(withTitle: filterType.key, at: count, animated: false)
-                count += 1
-            }
-            segmentControl.selectedSegmentIndex = 0
-        }
-        tableView.reloadData()
-    }
 
 }
 
 extension FilterListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let key = segmentKey[segmentControl.selectedSegmentIndex] else {
-            return 0
-        }
-        
-        guard let filters = filterList[key] else {
-            return 0
-        }
-        
         return filters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let filters = filterList[segmentKey[segmentControl.selectedSegmentIndex]!]!
-        var cell = tableView.dequeueReusableCell(withIdentifier: "Filter List Cell")
-        if cell == nil {
-            cell = UITableViewCell()
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Filter List Cell")
         let filter = filters[indexPath.row]
-        
-        cell!.textLabel?.text = filter.name
+        cell?.textLabel?.text = filter.name
         if filter.selected {
             cell!.accessoryType = .checkmark
         } else {
@@ -97,16 +73,17 @@ extension FilterListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var filters = filterList[segmentKey[segmentControl.selectedSegmentIndex]!]!
-        filters[indexPath.row].selected = !filters[indexPath.row].selected
-        
         let cell = tableView.cellForRow(at: indexPath)
-        if filters[indexPath.row].selected {
+        
+        let filter = filters[indexPath.row]
+        filter.selected = !filter.selected
+        
+        if filter.selected {
             cell!.accessoryType = .checkmark
         } else {
             cell!.accessoryType = .none
         }
         
-        filterList[segmentKey[segmentControl.selectedSegmentIndex]!]! = filters
     }
+    
 }

@@ -8,30 +8,35 @@
 
 import Foundation
 
-protocol FilterListPresentatorDelegate {
-    func viewDidLoad()
-    func onDoneTapped(returning filterList: [String: [Filter]])
-}
-
-class FilterListPresentator: FilterListPresentatorDelegate {
+class FilterListPresentator: FilterListViewDelegate {
     
     weak var view: FilterListViewControllerProtocol!
     var interactor: FilterListInteractorProtocol!
     var router: FilterListRouterProtocol!
+    var currentSegment: FilterType = .Project
     
-    func onDoneTapped(returning filterList: [String: [Filter]]) {
-        router.dismiss(returning: filterList)
+    func onDoneTapped() {
+        router.dismiss(returning: [:])
     }
     
     func viewDidLoad() {
-        interactor.getFilterList { (result) in
+        reloadView()
+    }
+    
+    private func reloadView() {
+        interactor.getFilterList(type: currentSegment) { (result) in
             switch result {
             case .error:
                 () // TODO: show alert
-            case .success(let filterList):
-                self.view.filterList = filterList
-                self.view.reloadView()
+            case .success(let filters):
+                self.view.filters = filters
             }
         }
     }
+    
+    func onSegmentChange(to page: FilterType) {
+        currentSegment = page
+        reloadView()
+    }
+    
 }
