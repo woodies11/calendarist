@@ -38,11 +38,11 @@ protocol FilterListRouterProtocol: RouterProtocol {
     static func createModule(initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) -> UIViewController
     static func configureModule(navigationController view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol)
     static func presentModally(targetView view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol)
-    func dismiss(returning filterList: [String: [Filter]])
+    func dismiss(returning filters: [Filter])
 }
 
 protocol FilterListModuleDelegate {
-    func onFilterListReturnWithFilterOptions(filterList: [String: [Filter]])
+    func onFilterListReturnWithFilterOptions(filters: [Filter])
 }
 
 class FilterListRouter: FilterListRouterProtocol {
@@ -90,9 +90,9 @@ class FilterListRouter: FilterListRouterProtocol {
         
     }
     
-    func dismiss(returning filterList: [String : [Filter]]) {
+    func dismiss(returning filters: [Filter]) {
         view.dismiss(animated: true) {
-            self.delegate?.onFilterListReturnWithFilterOptions(filterList: filterList)
+            self.delegate?.onFilterListReturnWithFilterOptions(filters: filters)
         }
     }
 }

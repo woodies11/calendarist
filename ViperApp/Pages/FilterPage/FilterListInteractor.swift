@@ -12,6 +12,7 @@ import Foundation
 
 protocol FilterListInteractorProtocol {
     func getFilterList(type: FilterType, completion: @escaping NetworkCompletionHandler<[Filter]>)
+    var localFiltersList: [Filter]! { get }
 }
 
 class FilterListInteractor: FilterListInteractorProtocol {

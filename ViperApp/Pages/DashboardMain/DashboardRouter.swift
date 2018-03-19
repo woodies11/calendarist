@@ -63,8 +63,8 @@ class DashboardRouter: DashboardRouterProtocol {
 }
 
 extension DashboardRouter: FilterListModuleDelegate {
-    func onFilterListReturnWithFilterOptions(filterList: [String : [Filter]]) {
-        presentator?.updateFilterList(filterList: filterList)
+    func onFilterListReturnWithFilterOptions(filters: [Filter]) {
+        presentator?.filterUpdated(filters: filters)
     }
 }
 

@@ -16,7 +16,11 @@ class FilterListPresentator: FilterListViewDelegate {
     var currentSegment: FilterType = .Project
     
     func onDoneTapped() {
-        router.dismiss(returning: [:])
+        if let filters = interactor.localFiltersList {
+            router.dismiss(returning: filters)
+        } else {
+            router.dismiss(returning: [])
+        }
     }
     
     func viewDidLoad() {

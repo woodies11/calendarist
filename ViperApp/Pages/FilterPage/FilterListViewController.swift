@@ -39,6 +39,7 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
     }
     
     @IBAction func onDoneTapped(_ sender: Any) {
+        presentator?.onDoneTapped()
     }
     
     override func viewDidLoad() {
