@@ -25,10 +25,6 @@ class DashboardPresentator: DashboardPresentatorDelegate {
     var projectToShow: [Int] = []
     var labelToShow: [Int] = []
     
-    // In case a filter present is currently applied,
-    // we want to store it here.
-    var currentFilter: [String: [Filter]]?
-    
     func viewDidLoad() {
         // get (fetch if needed) tasks from Todoist
         interactor.getTasks { (result) in
@@ -48,7 +44,7 @@ class DashboardPresentator: DashboardPresentatorDelegate {
         // What is currently being selected
         // If this is nil, FilterList will
         // fetech a new list.
-        router.presentFilterList(initial: currentFilter)
+        router.presentFilterList(initial: interactor.currentFilter)
     }
     
     func updateFilterList(filterList: [String: [Filter]]) {

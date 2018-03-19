@@ -9,6 +9,7 @@
 import Foundation
 
 protocol FilterListPresentatorDelegate {
+    func viewDidLoad()
     func onDoneTapped(returning filterList: [String: [Filter]])
 }
 
@@ -20,5 +21,20 @@ class FilterListPresentator: FilterListPresentatorDelegate {
     
     func onDoneTapped(returning filterList: [String: [Filter]]) {
         router.dismiss(returning: filterList)
+    }
+    
+    func viewDidLoad() {
+        interactor.getFilterList { (result) in
+            switch result {
+            case .error:
+                () // TODO: show alert
+            case .success(let filterList):
+                var mutableFilterList: [String: NSMutableArray] = [:]
+                for dict in filterList {
+                    mutableFilterList[dict.key] = NSMutableArray(array: dict.value)
+                }
+                self.view.filterList = mutableFilterList
+            }
+        }
     }
 }

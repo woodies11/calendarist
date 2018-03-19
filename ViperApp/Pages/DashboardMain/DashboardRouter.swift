@@ -19,6 +19,7 @@ class DashboardRouter: DashboardRouterProtocol {
     // Hold reference to view for Segue and other navigation function.
     weak var view: UIViewController!
     var presentator: DashboardPresentatorDelegate!
+    var todoistModule: TodoistModuleProtocol!
     
     /**
      create, bind, and initialize DashboardViewController
@@ -47,6 +48,9 @@ class DashboardRouter: DashboardRouterProtocol {
         router.view = dashboardViewController
         router.presentator = presentator
         
+        // FIXME: change to a better dependency injecting
+        router.todoistModule = todoistModule
+        
         dashboardViewController.presentator = presentator
         
         // Don't forget that we do need the NavViewController
@@ -54,7 +58,7 @@ class DashboardRouter: DashboardRouterProtocol {
     }
     
     func presentFilterList(initial filterList: [String: [Filter]]?) {
-        FilterListRouter.presentModally(targetView: view, initial: filterList, delegate: self)
+        FilterListRouter.presentModally(targetView: view, initial: filterList, delegate: self, todoistModule: self.todoistModule)
     }
 }
 

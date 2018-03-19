@@ -12,14 +12,14 @@ import UIKit
 /// Data Transfer Object for Filters.
 struct Filter {
     var id: Int!
-    var name: Int!
+    var name: String!
     var selected: Bool!
 }
 
 protocol FilterListRouterProtocol: RouterProtocol {
-    static func createModule(initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?) -> UIViewController
-    static func configureModule(navigationController view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?)
-    static func presentModally(targetView view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?)
+    static func createModule(initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) -> UIViewController
+    static func configureModule(navigationController view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol)
+    static func presentModally(targetView view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol)
     func dismiss(returning filterList: [String: [Filter]])
 }
 
@@ -34,36 +34,32 @@ class FilterListRouter: FilterListRouterProtocol {
     // Delegate for passing data back.
     var delegate: FilterListModuleDelegate?
     
-    class func presentModally(targetView view: UIViewController, initial filterList: [String : [Filter]]?, delegate: FilterListModuleDelegate?) {
-        let filterListNavController = FilterListRouter.createModule(initial: filterList, delegate: delegate)
+    class func presentModally(targetView view: UIViewController, initial filterList: [String : [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) {
+        let filterListNavController = FilterListRouter.createModule(initial: filterList, delegate: delegate, todoistModule: todoistModule)
         view.present(filterListNavController, animated: true, completion: nil)
     }
     
-    class func createModule(initial filterList: [String : [Filter]]?, delegate: FilterListModuleDelegate?) -> UIViewController {
+    class func createModule(initial filterList: [String : [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) -> UIViewController {
         
         // Instantiate the NavController which we define in Main Storyboard.
         // This will also instantiate our FilterListViewController since the
         // NavController have the view as its RootViewController.
         let navController = mainStoryboard.instantiateViewController(withIdentifier: "FilterNavController")
-        FilterListRouter.configureModule(navigationController: navController, initial: filterList, delegate: delegate)
+        FilterListRouter.configureModule(navigationController: navController, initial: filterList, delegate: delegate, todoistModule: todoistModule)
         
         return navController
     }
     
-    class func configureModule(navigationController view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?) {
+    class func configureModule(navigationController view: UIViewController, initial filterList: [String: [Filter]]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) {
         
         guard let filterListViewController = view.childViewControllers.first as? FilterListViewController
             else {
                 fatalError("Unable to get FilterListViewController!")
         }
         
-        if let filterList = filterList {
-            filterListViewController.filterList = filterList
-        }
-        
         // Create and assign the needed component to our ViewController
         let presentator = FilterListPresentator()
-        let interactor = FilterListInteractor()
+        let interactor = FilterListInteractor(todoistModule: todoistModule)
         let router = FilterListRouter()
         
         router.view = filterListViewController

@@ -186,6 +186,9 @@
                                     <segment title="Second"/>
                                 </segments>
                                 <color key="tintColor" red="0.7991289496421814" green="0.14242991805076599" blue="0.21944716572761536" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="onSegmentChanged:" destination="tjI-He-TBI" eventType="valueChanged" id="Pm3-Tm-oY3"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UEm-eb-Lyp">
                                 <rect key="frame" x="0.0" y="122" width="375" height="545"/>

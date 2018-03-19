@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 struct TDProject: Comparable {
-    var id: String!
+    var id: Int!
     var name: String!
     var indent: Int!
     var order: Int!
