@@ -10,6 +10,8 @@ import Foundation
 
 protocol TodoistModuleProtocol {
     func getAllTasks(completion: @escaping NetworkCompletionHandler<[TDTask]>)
+    func getAllLabels(completion: @escaping NetworkCompletionHandler<[TDLabel]>)
+    func getAllProjects(completion: @escaping NetworkCompletionHandler<[TDProject]>)
 }
 
 class TodoistModule: TodoistModuleProtocol {
@@ -40,6 +42,22 @@ class TodoistModule: TodoistModuleProtocol {
             authenticate()
         }
         tdSyncService.getTasks(withFilter: nil, completion: completion)
+    }
+    
+    func getAllLabels(completion: @escaping (NetworkResult<[TDLabel]>) -> Void) {
+        if !isAuthenticated() {
+            // FIXME: should throw exception or redirect user to login page
+            authenticate()
+        }
+        tdSyncService.getAllLabels(completion: completion)
+    }
+    
+    func getAllProjects(completion: @escaping (NetworkResult<[TDProject]>) -> Void) {
+        if !isAuthenticated() {
+            // FIXME: should throw exception or redirect user to login page
+            authenticate()
+        }
+        tdSyncService.getAllProjects(completion: completion)
     }
     
     

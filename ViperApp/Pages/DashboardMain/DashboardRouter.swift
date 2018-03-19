@@ -11,7 +11,7 @@ import UIKit
 
 protocol DashboardRouterProtocol: RouterProtocol {
     static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
-    func presentFilterList(filterList: [String: [Filter]])
+    func presentFilterList(initial filterList: [String: [Filter]]?)
 }
 
 class DashboardRouter: DashboardRouterProtocol {
@@ -53,8 +53,8 @@ class DashboardRouter: DashboardRouterProtocol {
         return navController
     }
     
-    func presentFilterList(filterList: [String: [Filter]]) {
-        FilterListRouter.presentModally(targetView: view, filterList: filterList, delegate: self)
+    func presentFilterList(initial filterList: [String: [Filter]]?) {
+        FilterListRouter.presentModally(targetView: view, initial: filterList, delegate: self)
     }
 }
 

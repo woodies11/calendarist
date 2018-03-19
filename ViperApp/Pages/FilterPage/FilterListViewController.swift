@@ -19,7 +19,7 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
-    var filterList: [String: [Filter]] = [:] {
+    var filterList: [String: [Filter]]! = [:] {
         didSet {
             self.reloadView()
         }

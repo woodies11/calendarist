@@ -19,6 +19,6 @@ class FilterListPresentator: FilterListPresentatorDelegate {
     var router: FilterListRouterProtocol!
     
     func onDoneTapped(returning filterList: [String: [Filter]]) {
-        router.dismiss(filterList: filterList)
+        router.dismiss(returning: filterList)
     }
 }
