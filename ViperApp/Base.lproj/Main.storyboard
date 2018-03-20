@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--LoginPage-->
         <scene sceneID="gvZ-6B-mok">
@@ -18,25 +23,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Todoist Dashboard!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyg-ua-YIK">
-                                <rect key="frame" x="65" y="92" width="245" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendarist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyg-ua-YIK">
+                                <rect key="frame" x="108.5" y="92" width="158" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" red="0.84990787506103516" green="0.27498537302017212" blue="0.22448807954788208" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RU-r5-0He">
-                                <rect key="frame" x="110.5" y="326.5" width="154" height="34"/>
-                                <color key="backgroundColor" red="0.85669362545013428" green="0.24292069673538208" blue="0.18817895650863647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RU-r5-0He">
+                                <rect key="frame" x="77.5" y="317.5" width="220" height="52"/>
+                                <color key="backgroundColor" red="0.85669362549999994" green="0.24292069669999999" blue="0.18817895649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="pIm-hT-bUW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Connect to Todoist">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <inset key="contentEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
+                                <state key="normal" title="Connect to Todoist"/>
                                 <connections>
                                     <action selector="onConnectButtonPressed:" destination="SaB-fe-aGu" eventType="touchUpInside" id="asu-hM-gYT"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2RU-r5-0He" firstAttribute="centerY" secondItem="xDN-uh-d6I" secondAttribute="centerY" id="5Aw-6b-SpW"/>
                             <constraint firstItem="2RU-r5-0He" firstAttribute="centerX" secondItem="xDN-uh-d6I" secondAttribute="centerX" id="JyE-BB-QRx"/>
@@ -45,6 +54,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xDN-uh-d6I"/>
                     </view>
+                    <connections>
+                        <outlet property="connectButton" destination="2RU-r5-0He" id="PxE-Li-elI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8s-Lu-M0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -160,7 +172,7 @@
                                 <action selector="onLogoutButtonTapped:" destination="mE6-zv-uVQ" id="S6m-iI-65E"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="r2P-ic-n43">
+                        <barButtonItem key="rightBarButtonItem" title="Filters" id="r2P-ic-n43">
                             <connections>
                                 <action selector="onFilterButtonTapped:" destination="mE6-zv-uVQ" id="8Xq-po-tJ6"/>
                             </connections>
@@ -176,7 +188,7 @@
             </objects>
             <point key="canvasLocation" x="1690" y="-197"/>
         </scene>
-        <!--Filter List View Controller-->
+        <!--Filters-->
         <scene sceneID="V8p-Op-vVc">
             <objects>
                 <viewController id="tjI-He-TBI" customClass="FilterListViewController" customModule="ViperApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -190,7 +202,7 @@
                                     <segment title="Projects"/>
                                     <segment title="Labels"/>
                                 </segments>
-                                <color key="tintColor" red="0.7991289496421814" green="0.14242991805076599" blue="0.21944716572761536" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.85747599601745605" green="0.27889752388000488" blue="0.22840330004692078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onSegmentChanged:" destination="tjI-He-TBI" eventType="valueChanged" id="Pm3-Tm-oY3"/>
                                 </connections>
@@ -234,7 +246,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oMZ-Ft-pBs"/>
                     </view>
-                    <navigationItem key="navigationItem" id="CU2-Z0-Eyp">
+                    <navigationItem key="navigationItem" title="Filters" id="CU2-Z0-Eyp">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Q4p-Ni-0vW">
                             <connections>
                                 <action selector="onDoneTapped:" destination="tjI-He-TBI" id="cLl-dY-W9e"/>

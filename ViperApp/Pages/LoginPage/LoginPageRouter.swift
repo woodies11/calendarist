@@ -53,7 +53,7 @@ class LoginPageRouter: LoginPageRouterProtocol {
     func showLoginPage() {
         todoistModule.initiateOAuth(sourceView: self.view) { (result) in
             switch result {
-            case .success(let _):
+            case .success( _):
                 self.showDashboard()
             case .error:
                 ()

@@ -15,6 +15,7 @@ class LoginPageViewController: UIViewController, LoginPageViewControllerProtocol
     
     var presentator: LoginPagePresentatorInput!
     
+    @IBOutlet weak var connectButton: UIButton!
     @IBAction func onConnectButtonPressed(_ sender: Any) {
         presentator.initiateLoginProcedure()
     }
@@ -22,6 +23,14 @@ class LoginPageViewController: UIViewController, LoginPageViewControllerProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        connectButton.layer.cornerRadius = 8
+        connectButton.layer.masksToBounds = false
+        connectButton.layer.shadowColor = UIColor.black.cgColor
+        connectButton.layer.shadowRadius = 3
+        connectButton.layer.shadowOpacity = 0.2
+        connectButton.layer.shadowOffset = CGSize(width: 0, height: 0.5)
+        
     }
 
     override func didReceiveMemoryWarning() {
