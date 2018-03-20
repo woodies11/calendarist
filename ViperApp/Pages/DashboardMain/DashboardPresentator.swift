@@ -37,7 +37,7 @@ class DashboardPresentator: DashboardPresentatorDelegate {
             case .success(let taskList):
                 self.view.taskList = taskList
             case .error:
-                self.view.showAlert(title: "Oops...", message: "Cannot get tasks.")
+                self.view.showAlert(title: "Oops...", message: "Cannot get tasks. Please check your Internet Connection.")
             }
         }
     }

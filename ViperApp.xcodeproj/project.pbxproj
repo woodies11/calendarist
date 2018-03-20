@@ -10,7 +10,6 @@
 		45683860A563AEF007D2D28D /* Pods_ViperApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59DBF9B77FEF919857AA6717 /* Pods_ViperApp.framework */; };
 		4F28642C205BA3F90073FFA5 /* TodoistModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28642B205BA3F90073FFA5 /* TodoistModule.swift */; };
 		4F3C755E205AA5AF0088E189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C755D205AA5AF0088E189 /* AppDelegate.swift */; };
-		4F3C7560205AA5AF0088E189 /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C755F205AA5AF0088E189 /* LoginPageViewController.swift */; };
 		4F3C7563205AA5AF0088E189 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7561205AA5AF0088E189 /* Main.storyboard */; };
 		4F3C7565205AA5AF0088E189 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7564205AA5AF0088E189 /* Assets.xcassets */; };
 		4F3C7568205AA5AF0088E189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7566205AA5AF0088E189 /* LaunchScreen.storyboard */; };
@@ -27,11 +26,14 @@
 		4F5B5BDE205ED7A100963A1C /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5B5BDD205ED7A100963A1C /* Entities.swift */; };
 		4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */; };
 		4F61E5F2205BFCB00030C4A3 /* TDEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */; };
-		4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7BB785205BC15100915911 /* LoginPageProtocols.swift */; };
+		4F7BB786205BC15100915911 /* LoginPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7BB785205BC15100915911 /* LoginPageRouter.swift */; };
 		4FB8FEFC205F10A200C6C808 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FEFB205F10A200C6C808 /* FilterListViewController.swift */; };
 		4FB8FEFE205F10AC00C6C808 /* FilterListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FEFD205F10AC00C6C808 /* FilterListRouter.swift */; };
 		4FB8FF04205F10DC00C6C808 /* FilterListPresentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF03205F10DC00C6C808 /* FilterListPresentator.swift */; };
 		4FB8FF06205F10E800C6C808 /* FilterListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF05205F10E800C6C808 /* FilterListInteractor.swift */; };
+		4FB8FF422061699400C6C808 /* LoginPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF412061699400C6C808 /* LoginPageInteractor.swift */; };
+		4FB8FF44206169AE00C6C808 /* LoginPagePresentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF43206169AE00C6C808 /* LoginPagePresentator.swift */; };
+		4FB8FF46206169DD00C6C808 /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF45206169DD00C6C808 /* LoginPageViewController.swift */; };
 		9809D87197CF5BF795035D29 /* Pods_ViperAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B4D179AE49A581BE26C9FD /* Pods_ViperAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +52,6 @@
 		4F28642B205BA3F90073FFA5 /* TodoistModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoistModule.swift; sourceTree = "<group>"; };
 		4F3C755A205AA5AF0088E189 /* ViperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3C755D205AA5AF0088E189 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4F3C755F205AA5AF0088E189 /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPageViewController.swift; path = ../../LoginPageViewController.swift; sourceTree = "<group>"; };
 		4F3C7562205AA5AF0088E189 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F3C7564205AA5AF0088E189 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F3C7567205AA5AF0088E189 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -70,11 +71,14 @@
 		4F5B5BDD205ED7A100963A1C /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		4F61E5EF205BF8060030C4A3 /* TDEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEndpoint.swift; sourceTree = "<group>"; };
 		4F61E5F1205BFCB00030C4A3 /* TDEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEntities.swift; sourceTree = "<group>"; };
-		4F7BB785205BC15100915911 /* LoginPageProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageProtocols.swift; sourceTree = "<group>"; };
+		4F7BB785205BC15100915911 /* LoginPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageRouter.swift; sourceTree = "<group>"; };
 		4FB8FEFB205F10A200C6C808 /* FilterListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
 		4FB8FEFD205F10AC00C6C808 /* FilterListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListRouter.swift; sourceTree = "<group>"; };
 		4FB8FF03205F10DC00C6C808 /* FilterListPresentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListPresentator.swift; sourceTree = "<group>"; };
 		4FB8FF05205F10E800C6C808 /* FilterListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListInteractor.swift; sourceTree = "<group>"; };
+		4FB8FF412061699400C6C808 /* LoginPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageInteractor.swift; sourceTree = "<group>"; };
+		4FB8FF43206169AE00C6C808 /* LoginPagePresentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPagePresentator.swift; sourceTree = "<group>"; };
+		4FB8FF45206169DD00C6C808 /* LoginPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 		59DBF9B77FEF919857AA6717 /* Pods_ViperApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViperApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D978D063FCA25ECD2D69641 /* Pods-ViperApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViperApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViperApp/Pods-ViperApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B4D179AE49A581BE26C9FD /* Pods_ViperAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViperAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,8 +205,10 @@
 		4F4B3753205AE1E900660151 /* LoginPage */ = {
 			isa = PBXGroup;
 			children = (
-				4F3C755F205AA5AF0088E189 /* LoginPageViewController.swift */,
-				4F7BB785205BC15100915911 /* LoginPageProtocols.swift */,
+				4FB8FF45206169DD00C6C808 /* LoginPageViewController.swift */,
+				4F7BB785205BC15100915911 /* LoginPageRouter.swift */,
+				4FB8FF412061699400C6C808 /* LoginPageInteractor.swift */,
+				4FB8FF43206169AE00C6C808 /* LoginPagePresentator.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -489,20 +495,22 @@
 				4FB8FF06205F10E800C6C808 /* FilterListInteractor.swift in Sources */,
 				4F61E5F2205BFCB00030C4A3 /* TDEntities.swift in Sources */,
 				4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */,
-				4F3C7560205AA5AF0088E189 /* LoginPageViewController.swift in Sources */,
 				4FB8FF04205F10DC00C6C808 /* FilterListPresentator.swift in Sources */,
 				4F28642C205BA3F90073FFA5 /* TodoistModule.swift in Sources */,
 				4F5B5BD5205E520E00963A1C /* DashboardPresentator.swift in Sources */,
 				4F4B3756205B74A000660151 /* TDOAuthService.swift in Sources */,
 				4F4B3724205AD6FC00660151 /* TDRESTService.swift in Sources */,
+				4FB8FF44206169AE00C6C808 /* LoginPagePresentator.swift in Sources */,
 				4F5B5BDE205ED7A100963A1C /* Entities.swift in Sources */,
 				4FB8FEFE205F10AC00C6C808 /* FilterListRouter.swift in Sources */,
-				4F7BB786205BC15100915911 /* LoginPageProtocols.swift in Sources */,
+				4F7BB786205BC15100915911 /* LoginPageRouter.swift in Sources */,
+				4FB8FF46206169DD00C6C808 /* LoginPageViewController.swift in Sources */,
 				4F5B5BD3205E51E700963A1C /* DashboardInteractor.swift in Sources */,
 				4FB8FEFC205F10A200C6C808 /* FilterListViewController.swift in Sources */,
 				4F5B5BDA205EAF1700963A1C /* NetworkEntities.swift in Sources */,
 				4F5B5BDC205EBC6400963A1C /* Router.swift in Sources */,
 				4F5B5BD1205E51CE00963A1C /* DashboardViewController.swift in Sources */,
+				4FB8FF422061699400C6C808 /* LoginPageInteractor.swift in Sources */,
 				4F5B5BCD205E519700963A1C /* DashboardRouter.swift in Sources */,
 				4F3C755E205AA5AF0088E189 /* AppDelegate.swift in Sources */,
 			);

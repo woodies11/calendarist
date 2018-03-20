@@ -120,7 +120,6 @@ class TDRESTService: TDRESTServiceProtocol {
                     if let label_id = label_id {
                         // If no label is selected, we will show
                         // all tasks.
-                        if label_id.count <= 0 { continue }
                         
                         // If at least one label is selected:
                         // We will only show tasks that have the labels
@@ -130,7 +129,7 @@ class TDRESTService: TDRESTServiceProtocol {
                         //
                         // If the intersection is empty (count <= 0),
                         // the task has no labels which we want to show.
-                        if label_id.intersection(task.label_ids).count <= 0 {
+                        if label_id.count > 0 && label_id.intersection(task.label_ids).count <= 0 {
                             continue
                         }
                         
