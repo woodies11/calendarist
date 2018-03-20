@@ -155,6 +155,11 @@
                         <viewLayoutGuide key="safeArea" id="hbX-RK-qrs"/>
                     </view>
                     <navigationItem key="navigationItem" title="TD Dashboard" id="j7a-UV-R84">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" style="plain" id="CUV-wu-wI3">
+                            <connections>
+                                <action selector="onLogoutButtonTapped:" destination="mE6-zv-uVQ" id="S6m-iI-65E"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="r2P-ic-n43">
                             <connections>
                                 <action selector="onFilterButtonTapped:" destination="mE6-zv-uVQ" id="8Xq-po-tJ6"/>

@@ -12,6 +12,7 @@ import UIKit
 protocol DashboardRouterProtocol: RouterProtocol {
     static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
     func presentFilterList(initial filters: [Filter]?)
+    func navigateBackToLogin()
 }
 
 class DashboardRouter: DashboardRouterProtocol {
@@ -60,6 +61,11 @@ class DashboardRouter: DashboardRouterProtocol {
     func presentFilterList(initial filters: [Filter]?) {
         FilterListRouter.presentModally(targetView: view, initial: filters, delegate: self, todoistModule: self.todoistModule)
     }
+    
+    func navigateBackToLogin() {
+        view.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension DashboardRouter: FilterListModuleDelegate {

@@ -11,6 +11,7 @@ import SwiftDate
 
 protocol DashboardInteractorProtocol {
     func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>)
+    func userLoggingOut()
 }
 
 class DashboardInteractor: DashboardInteractorProtocol {
@@ -55,6 +56,10 @@ class DashboardInteractor: DashboardInteractorProtocol {
                 completion(.error)
             }
         }
+    }
+    
+    func userLoggingOut() {
+        tdModule.clearLoginData()
     }
     
     private func generateTaskList(_ tdTasks: [TDTask]) -> [Date: [String]] {

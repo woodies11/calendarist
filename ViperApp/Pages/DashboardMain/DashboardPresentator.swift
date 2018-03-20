@@ -11,6 +11,7 @@ import Foundation
 protocol DashboardPresentatorDelegate {
     func viewDidLoad()
     func onFilterButtonTapped()
+    func onLogoutButtonTapped()
     func filterUpdated(filters: [Filter])
 }
 
@@ -50,6 +51,11 @@ class DashboardPresentator: DashboardPresentatorDelegate {
         // If this is nil, FilterList will
         // fetech a new list.
         router.presentFilterList(initial: currentFilters)
+    }
+    
+    func onLogoutButtonTapped() {
+        interactor.userLoggingOut()
+        router.navigateBackToLogin()
     }
     
     func filterUpdated(filters: [Filter]) {

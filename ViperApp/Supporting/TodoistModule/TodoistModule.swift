@@ -14,6 +14,7 @@ protocol TodoistModuleProtocol {
     func getAllLabels(completion: @escaping NetworkCompletionHandler<[TDLabel]>)
     func getAllProjects(completion: @escaping NetworkCompletionHandler<[TDProject]>)
     func initiateOAuth(sourceView view: UIViewController, completion: @escaping NetworkCompletionHandler<Bool>)
+    func clearLoginData()
 }
 
 class TodoistModule: TodoistModuleProtocol {
@@ -31,6 +32,10 @@ class TodoistModule: TodoistModuleProtocol {
             self.token = access_token
             self.tdSyncService = TDRESTService(token: access_token)
         }
+    }
+    
+    func clearLoginData() {
+        UserDefaults.standard.removeObject(forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY)
     }
     
     // TODO: change to completion handler

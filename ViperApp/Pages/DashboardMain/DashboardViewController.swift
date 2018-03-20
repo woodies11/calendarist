@@ -38,6 +38,10 @@ class DashboardViewController: UIViewController, DashboardViewControllerProtocol
         presentator?.onFilterButtonTapped()
     }
     
+    @IBAction func onLogoutButtonTapped(_ sender: Any) {
+        presentator?.onLogoutButtonTapped()
+    }
+    
     func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?) {
         self.dismiss(animated: true, completion: nil)
         self.present(viewControllerToPresent, animated: animated, completion: completion)
