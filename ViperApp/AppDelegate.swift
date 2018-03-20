@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -23,15 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let tdModule = TodoistModule()
         
-        let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewControlleripad : UIViewController!
         
         // TODO: remove this
-        if !tdModule.isAuthenticated() {
+        if tdModule.isAuthenticated() {
             // If already have credential, show the Dashboard right away!
             initialViewControlleripad = DashboardRouter.createModule(todoistModule: tdModule)
         } else {
-            initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "ConnectPage") as UIViewController
+            initialViewControlleripad = LoginPageRouter.createModule(todoistModule: tdModule)
         }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -61,6 +60,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if (url.host == "oauth-callback") {
+            print(url)
+            OAuthSwift.handle(url: url)
+        }
+        return true
     }
 
 

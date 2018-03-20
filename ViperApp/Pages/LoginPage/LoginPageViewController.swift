@@ -13,10 +13,10 @@ protocol LoginPageViewControllerProtocol: AnyObject {
 
 class LoginPageViewController: UIViewController, LoginPageViewControllerProtocol {
     
-    var presentator: LoginPagePresentatorProtocol!
+    var presentator: LoginPagePresentatorInput!
     
     @IBAction func onConnectButtonPressed(_ sender: Any) {
-        
+        presentator.initiateLoginProcedure()
     }
     
     override func viewDidLoad() {

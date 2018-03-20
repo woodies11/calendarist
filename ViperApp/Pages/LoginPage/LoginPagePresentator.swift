@@ -9,14 +9,18 @@
 import Foundation
 
 
-protocol LoginPagePresentatorProtocol {
-    
+protocol LoginPagePresentatorInput {
+    func initiateLoginProcedure()
 }
 
-class LoginPagePresentator: LoginPagePresentatorProtocol {
+class LoginPagePresentator: LoginPagePresentatorInput {
     
     weak var view: LoginPageViewControllerProtocol!
     var interactor: LoginPageInteractorProtocol!
     var router: LoginPageRouterProtocol!
+    
+    func initiateLoginProcedure() {
+        router.showLoginPage()
+    }
     
 }

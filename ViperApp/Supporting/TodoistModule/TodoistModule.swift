@@ -7,28 +7,50 @@
 //
 
 import Foundation
+import UIKit
 
 protocol TodoistModuleProtocol {
     func getTasks(withFilter filters: TDFilter?, completion: @escaping NetworkCompletionHandler<[TDTask]>)
     func getAllLabels(completion: @escaping NetworkCompletionHandler<[TDLabel]>)
     func getAllProjects(completion: @escaping NetworkCompletionHandler<[TDProject]>)
+    func initiateOAuth(sourceView view: UIViewController, completion: @escaping NetworkCompletionHandler<Bool>)
 }
 
 class TodoistModule: TodoistModuleProtocol {
+    
+    static let USER_DEFAULT_TOKEN_KEY = "USER_DEFAULT_TOKEN_KEY"
     
     var token: String?
     
     var tdOAuthService: TDOAuthService!
     var tdSyncService: TDRESTService!
     
+    init() {
+        // Try to load stored token first
+        if let access_token = UserDefaults.standard.string(forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY) {
+            self.token = access_token
+            self.tdSyncService = TDRESTService(token: access_token)
+        }
+    }
+    
     // TODO: change to completion handler
-    func authenticate() {
+    func initiateOAuth(sourceView view: UIViewController, completion: @escaping NetworkCompletionHandler<Bool>) {
         tdOAuthService = TDOAuthService()
         
         // try to get token
-        tdOAuthService.initiateOAuth(error: nil) { (access_token) in
+        if let access_token = UserDefaults.standard.string(forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY) {
             self.token = access_token
-            tdSyncService = TDRESTService(token: token!)
+            self.tdSyncService = TDRESTService(token: access_token)
+            completion(.success(true))
+            return
+        }
+        
+        tdOAuthService.initiateOAuth(displayOAuthPageOn: view, error: nil) { (access_token) in
+            UserDefaults.standard.setValue(access_token, forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY)
+            self.token = access_token
+            self.tdSyncService = TDRESTService(token: access_token)
+            completion(.success(true))
+            return
         }
     }
     
@@ -39,7 +61,7 @@ class TodoistModule: TodoistModuleProtocol {
     func getTasks(withFilter filters: TDFilter?, completion: @escaping (NetworkResult<[TDTask]>) -> Void) {
         if !isAuthenticated() {
             // FIXME: should throw exception or redirect user to login page
-            authenticate()
+            completion(.error)
         }
         tdSyncService.getTasks(withFilter: filters, completion: completion)
         
@@ -48,7 +70,7 @@ class TodoistModule: TodoistModuleProtocol {
     func getAllLabels(completion: @escaping (NetworkResult<[TDLabel]>) -> Void) {
         if !isAuthenticated() {
             // FIXME: should throw exception or redirect user to login page
-            authenticate()
+            completion(.error)
         }
         tdSyncService.getAllLabels(completion: completion)
     }
@@ -56,7 +78,7 @@ class TodoistModule: TodoistModuleProtocol {
     func getAllProjects(completion: @escaping (NetworkResult<[TDProject]>) -> Void) {
         if !isAuthenticated() {
             // FIXME: should throw exception or redirect user to login page
-            authenticate()
+            completion(.error)
         }
         tdSyncService.getAllProjects(completion: completion)
     }

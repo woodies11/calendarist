@@ -11,6 +11,7 @@ target 'ViperApp' do
   pod 'AlamofireObjectMapper', '~> 5.0'
   pod 'FSCalendar'
   pod 'SwiftDate'
+  pod 'OAuthSwift', '~> 1.2.0'
 
   target 'ViperAppTests' do
     inherit! :search_paths

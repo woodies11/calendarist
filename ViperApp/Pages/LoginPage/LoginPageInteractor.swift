@@ -9,9 +9,7 @@
 import Foundation
 
 protocol LoginPageInteractorProtocol {
-    
 }
 
 class LoginPageInteractor: LoginPageInteractorProtocol {
-    
 }

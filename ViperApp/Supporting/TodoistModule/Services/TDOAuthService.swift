@@ -7,21 +7,57 @@
 //
 
 import Foundation
+import OAuthSwift
 
 // : AnyObject in Swift 4 == : class in Swift 3
 protocol OAuthService: AnyObject {
-    func initiateOAuth(error: ((AnyObject?) -> Void)?, success: (String) -> Void)
+    func initiateOAuth(displayOAuthPageOn view: UIViewController, error: ((AnyObject?) -> Void)?, success: @escaping (String) -> Void)
 }
 
 class TDOAuthService: OAuthService {
     
-    func initiateOAuth(error: ((AnyObject?) -> Void)?, success: (String) -> Void) {
-        success("3bb73220404b28e6aad84f27e04d549c9c22ae35")
+    let oauthswift = OAuth2Swift(
+        consumerKey: "6708fc59ee7f4746a6ea4ef13f660585",
+        consumerSecret: "0cee40bbdcbf4d38bf68b0ff9caaf8ac",
+        authorizeUrl: "https://todoist.com/oauth/authorize",
+        accessTokenUrl: "https://todoist.com/oauth/access_token",
+        responseType: "code"
+    )
+    
+    func initiateOAuth(displayOAuthPageOn view: UIViewController, error: ((AnyObject?) -> Void)?, success: @escaping (String) -> Void) {
+        
+        let state = generateState(withLength: 10)
+        
+        let handler = SafariURLHandler(viewController: view, oauthSwift: oauthswift)
+        handler.presentCompletion = {
+            print("Safari presented")
+        }
+        handler.dismissCompletion = {
+            print("Safari dismissed")
+        }
+        
+        oauthswift.authorizeURLHandler = handler
+        let _ = oauthswift.authorize(
+            withCallbackURL: URL(string: "com.rwp.tddashboard://oauth-callback")!,
+            scope: "data:read",
+            state: state,
+            success: { credential, response, parameters in
+                success(credential.oauthToken)
+            },
+            failure: { error in
+                // TODO: handle error properly
+                print(error.errorCode)
+                print(error.errorUserInfo)
+                print(error.localizedDescription)
+            }
+        )
+        
+        
     }
     
-    private let STATE = "AvPw8jYW44N2GsTX"
-    
     init() {
+        
+        
         
 //        // TodoistiCal OAuth
 //        let oauth2settings = [
@@ -35,7 +71,7 @@ class TDOAuthService: OAuthService {
 //            "scope": "data:read", // we only need to read data
 //            ]
         
-        
     }
+    
     
 }
