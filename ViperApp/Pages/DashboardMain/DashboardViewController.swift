@@ -143,4 +143,18 @@ extension DashboardViewController: FSCalendarDelegateAppearance {
         }
         return UIColor.white
     }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, borderSelectionColorFor date: Date) -> UIColor? {
+        if let tasks = taskList[date.startOfDay] {
+            return UIColor(red: 1, green: min(1-0.2*CGFloat(tasks.count), 1), blue: 0, alpha: 1)
+        }
+        return appearance.borderSelectionColor
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
+        if let tasks = taskList[date.startOfDay] {
+            return UIColor(red: 1, green: min(1-0.2*CGFloat(tasks.count), 1), blue: 0, alpha: 0.5)
+        }
+        return appearance.selectionColor
+    }
 }
