@@ -128,6 +128,30 @@ extension DashboardViewController: FSCalendarDelegate {
 }
 
 extension DashboardViewController: FSCalendarDelegateAppearance {
+    
+    func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
+        return min(max(value, lower), upper)
+    }
+    
+    private func colorForNumberOfTasks(numberOfTasks count: Int, alpha: CGFloat = 1) -> UIColor {
+        let HIGH_HUE: CGFloat = 0.0 // Red
+        let LOW_HUE: CGFloat = 54/360 // Yellow
+        
+        let HIGH_SAT: CGFloat = 0.6
+        let LOW_SAT: CGFloat = 0.3
+        
+        let NUM_STEPS: Int = 3
+        
+        let HUE_STEP: CGFloat = (HIGH_HUE-LOW_HUE)/CGFloat(NUM_STEPS)
+        let SAT_STEP: CGFloat = (HIGH_SAT-LOW_SAT)/CGFloat(NUM_STEPS)
+        
+        let HUE = clamp(value: (LOW_HUE+HUE_STEP*CGFloat(count)), lower: 0.0, upper: 1.0)
+        let SAT = clamp(value: (LOW_SAT+SAT_STEP*CGFloat(count)), lower: 0.0, upper: 1.0)
+        
+        return UIColor(hue: HUE, saturation: SAT, brightness: 1, alpha: alpha)
+        
+    }
+    
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         
         // We want to display a heat map on our calendar
@@ -139,21 +163,21 @@ extension DashboardViewController: FSCalendarDelegateAppearance {
             // on the number of tasks due. The more
             // tasks there is, the closer the color
             // is to pure red.
-            return UIColor(red: 1, green: min(1-0.2*CGFloat(tasks.count), 1), blue: 0, alpha: 1)
+            return colorForNumberOfTasks(numberOfTasks: tasks.count, alpha: 1)
         }
         return UIColor.white
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, borderSelectionColorFor date: Date) -> UIColor? {
         if let tasks = taskList[date.startOfDay] {
-            return UIColor(red: 1, green: min(1-0.2*CGFloat(tasks.count), 1), blue: 0, alpha: 1)
+            return colorForNumberOfTasks(numberOfTasks: tasks.count, alpha: 1)
         }
         return appearance.borderSelectionColor
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillSelectionColorFor date: Date) -> UIColor? {
         if let tasks = taskList[date.startOfDay] {
-            return UIColor(red: 1, green: min(1-0.2*CGFloat(tasks.count), 1), blue: 0, alpha: 0.5)
+            return colorForNumberOfTasks(numberOfTasks: tasks.count, alpha: 0.3)
         }
         return appearance.selectionColor
     }

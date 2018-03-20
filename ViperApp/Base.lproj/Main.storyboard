@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,14 +24,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendarist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyg-ua-YIK">
-                                <rect key="frame" x="108.5" y="92" width="158" height="36"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
-                                <color key="textColor" red="0.84990787506103516" green="0.27498537302017212" blue="0.22448807954788208" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2RU-r5-0He">
-                                <rect key="frame" x="77.5" y="317.5" width="220" height="52"/>
+                                <rect key="frame" x="77" y="429" width="220" height="52"/>
                                 <color key="backgroundColor" red="0.85669362549999994" green="0.24292069669999999" blue="0.18817895649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="pIm-hT-bUW"/>
@@ -43,14 +38,29 @@
                                     <action selector="onConnectButtonPressed:" destination="SaB-fe-aGu" eventType="touchUpInside" id="asu-hM-gYT"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendarist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyg-ua-YIK">
+                                <rect key="frame" x="148.5" y="92" width="158" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" red="0.84990787506103516" green="0.27498537302017212" blue="0.22448807954788208" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-Wire" translatesAutoresizingMaskIntoConstraints="NO" id="147-EE-mxo">
+                                <rect key="frame" x="60" y="70" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="F4u-q8-Mqf"/>
+                                    <constraint firstAttribute="width" secondItem="147-EE-mxo" secondAttribute="height" multiplier="1:1" id="aGP-Ub-AXZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2RU-r5-0He" firstAttribute="centerY" secondItem="xDN-uh-d6I" secondAttribute="centerY" id="5Aw-6b-SpW"/>
+                            <constraint firstItem="xDN-uh-d6I" firstAttribute="bottom" secondItem="2RU-r5-0He" secondAttribute="bottom" constant="186" id="2An-KK-8lz"/>
                             <constraint firstItem="2RU-r5-0He" firstAttribute="centerX" secondItem="xDN-uh-d6I" secondAttribute="centerX" id="JyE-BB-QRx"/>
+                            <constraint firstItem="pyg-ua-YIK" firstAttribute="centerX" secondItem="xDN-uh-d6I" secondAttribute="centerX" constant="40" id="Mb3-aX-cIu"/>
                             <constraint firstItem="pyg-ua-YIK" firstAttribute="top" secondItem="xDN-uh-d6I" secondAttribute="top" constant="72" id="dcP-F3-4C9"/>
-                            <constraint firstItem="pyg-ua-YIK" firstAttribute="centerX" secondItem="xDN-uh-d6I" secondAttribute="centerX" id="i49-9f-eYT"/>
+                            <constraint firstItem="pyg-ua-YIK" firstAttribute="leading" secondItem="147-EE-mxo" secondAttribute="trailing" constant="8.5" id="hQG-a6-BnX"/>
+                            <constraint firstItem="147-EE-mxo" firstAttribute="centerY" secondItem="pyg-ua-YIK" secondAttribute="centerY" id="owd-1N-tJW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xDN-uh-d6I"/>
                     </view>
@@ -60,7 +70,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8s-Lu-M0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44" y="-197"/>
+            <point key="canvasLocation" x="44" y="-197.45127436281859"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vHc-iL-BaP">
@@ -133,7 +143,7 @@
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="titleSelectionColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
                                         <color key="value" red="0.85669362549999994" green="0.24292069669999999" blue="0.18817895649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -142,11 +152,13 @@
                                         <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
-                                        <color key="value" white="0.38211495540000001" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="value" red="0.77175761010362698" green="0.77175761010362698" blue="0.77175761010362698" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
                                         <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsMultipleSelection" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsSelection" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="mE6-zv-uVQ" id="9La-hV-f2H"/>
@@ -166,7 +178,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hbX-RK-qrs"/>
                     </view>
-                    <navigationItem key="navigationItem" title="TD Dashboard" id="j7a-UV-R84">
+                    <navigationItem key="navigationItem" title="Calendarist" id="j7a-UV-R84">
                         <barButtonItem key="leftBarButtonItem" title="Logout" style="plain" id="CUV-wu-wI3">
                             <connections>
                                 <action selector="onLogoutButtonTapped:" destination="mE6-zv-uVQ" id="S6m-iI-65E"/>
@@ -279,4 +291,7 @@
             <point key="canvasLocation" x="2473" y="-197"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon-Wire" width="341" height="341"/>
+    </resources>
 </document>
