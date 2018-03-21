@@ -8,18 +8,11 @@
 
 import Foundation
 
-protocol DashboardPresentatorDelegate {
-    func viewDidLoad()
-    func onFilterButtonTapped()
-    func onLogoutButtonTapped()
-    func filterUpdated(filters: [Filter])
-}
-
-class DashboardPresentator: DashboardPresentatorDelegate {
+class DashboardPresentator: DashboardRouterOutput, DashboardViewOutput, DashboardInteractorOutput {
     
-    weak var view: DashboardViewControllerProtocol?
-    var interactor: DashboardInteractorProtocol!
-    var router: DashboardRouterProtocol!
+    weak var view: DashboardViewInput?
+    var interactor: DashboardInteractorInput!
+    var router: DashboardRouterInput!
     
     // Store ID of projects and labels to filter for.
     // Will fetch all if empty.

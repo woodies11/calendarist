@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol LoginPagePresentatorInput {
+protocol LoginPagePresentatorInput: RWPRouterOutput {
     func initiateLoginProcedure()
 }
 

@@ -1,10 +1,12 @@
 //
-//  RWPViperContracts.swift
+//  DashboardContracts.swift
 //  ViperApp
 //
-//  Created by Romson Preechawit on 18/3/18.
+//  Created by Romson Preechawit on 21/3/18.
 //  Copyright © 2018 RWP. All rights reserved.
 //
+
+import Foundation
 
 import Foundation
 import UIKit
@@ -15,8 +17,8 @@ import UIKit
 /*
  These naming are PRESENTATOR centric.
  e.g.
-    RWPViewInput is the view's input FROM the PRESENTATOR
-    RWPRouterOutput is the router's output TO the PRESENTATOR
+ RWPViewInput is the view's input FROM the PRESENTATOR
+ RWPRouterOutput is the router's output TO the PRESENTATOR
  
  The naming scheme Input/Output is used instead of delegate and
  the like to avoid confusion since the PRESENTATOR can be a delegate
@@ -28,8 +30,10 @@ import UIKit
 // VIEW <- PRESENTATOR
 // ------------------------------
 // This defines what the view can show.
-protocol RWPViewInput: AnyObject {
-    
+protocol DashboardViewInput: RWPViewInput {
+    var taskList: [Date: [String]] { get set }
+    func showAlert(title: String, message: String)
+    func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
 }
 
 // ------------------------------
@@ -40,8 +44,10 @@ protocol RWPViewInput: AnyObject {
 // can handle.
 //
 // (Basically View Delegate)
-protocol RWPViewOutput {
-    
+protocol DashboardViewOutput: RWPViewOutput {
+    func viewDidLoad()
+    func onFilterButtonTapped()
+    func onLogoutButtonTapped()
 }
 
 // ------------------------------
@@ -49,8 +55,10 @@ protocol RWPViewOutput {
 // ------------------------------
 // This defines where can the Presentator
 // tell the router to route to.
-protocol RWPRouterInput {
-    
+protocol DashboardRouterInput: RWPRouterInput {
+    static func createModule(tdService: TDServiceProtocol) -> UIViewController
+    func presentFilterList(initial filters: [Filter]?)
+    func navigateBackToLogin()
 }
 
 // ------------------------------
@@ -58,8 +66,8 @@ protocol RWPRouterInput {
 // ------------------------------
 // This allow the router to pass data to
 // the presentator.
-protocol RWPRouterOutput {
-    
+protocol DashboardRouterOutput: RWPRouterOutput {
+    func filterUpdated(filters: [Filter])
 }
 
 // ------------------------------
@@ -67,8 +75,9 @@ protocol RWPRouterOutput {
 // ------------------------------
 // This define what action can the interactor
 // complete for the presentator.
-protocol RWPInteractorInput {
-    
+protocol DashboardInteractorInput: RWPInteractorInput {
+    func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>)
+    func userLoggingOut()
 }
 
 // ------------------------------
@@ -76,23 +85,6 @@ protocol RWPInteractorInput {
 // ------------------------------
 // This allow the interactor to pass data back
 // to the presentator.
-protocol RWPInteractorOutput {
-    
-}
-
-// #########################################################################
-// For subclassing
-// #########################################################################
-// Below these are utilities class providing some default implementation
-// for various functions that are not really for communication between other
-// classes.
-
-// NOTE: I really want an Abstract class here so I can implement some of
-// the default LifeCycle stuffs.
-
-class RWPRouter {
-    static var mainStoryboard: UIStoryboard {
-        return UIStoryboard(name: "Main", bundle: Bundle.main)
-    }
+protocol DashboardInteractorOutput: RWPInteractorOutput {
 }
 

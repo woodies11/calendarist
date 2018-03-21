@@ -9,17 +9,11 @@
 
 import UIKit
 
-protocol DashboardRouterProtocol {
-    static func createModule(tdService: TDServiceProtocol) -> UIViewController
-    func presentFilterList(initial filters: [Filter]?)
-    func navigateBackToLogin()
-}
-
-class DashboardRouter: RWPRouter, DashboardRouterProtocol {
+class DashboardRouter: RWPRouter, DashboardRouterInput {
     
     // Hold reference to view for Segue and other navigation function.
     weak var view: UIViewController!
-    var presentator: DashboardPresentatorDelegate!
+    var presentator: DashboardRouterOutput!
     var tdService: TDServiceProtocol!
     
     /**

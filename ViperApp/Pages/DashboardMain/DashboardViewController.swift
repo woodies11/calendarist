@@ -9,15 +9,9 @@
 import UIKit
 import FSCalendar
 
-protocol DashboardViewControllerProtocol: AnyObject {
-    var taskList: [Date: [String]] { get set }
-    func showAlert(title: String, message: String)
-    func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
-}
+class DashboardViewController: UIViewController, DashboardViewInput {
 
-class DashboardViewController: UIViewController, DashboardViewControllerProtocol {
-
-    var presentator: DashboardPresentatorDelegate?
+    var presentator: DashboardViewOutput?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!

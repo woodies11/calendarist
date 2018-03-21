@@ -46,6 +46,8 @@ protocol FilterListModuleDelegate {
 }
 
 class FilterListRouter: RWPRouter, FilterListRouterProtocol {
+    var presentator: RWPRouterOutput!
+    
     
     // Hold reference to view for Segue and other navigation function.
     weak var view: UIViewController!

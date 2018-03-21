@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45683860A563AEF007D2D28D /* Pods_ViperApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59DBF9B77FEF919857AA6717 /* Pods_ViperApp.framework */; };
+		4F0793802062B8930029E3E6 /* DashboardContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F07937F2062B8930029E3E6 /* DashboardContracts.swift */; };
 		4F28642C205BA3F90073FFA5 /* TDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28642B205BA3F90073FFA5 /* TDService.swift */; };
 		4F3C755E205AA5AF0088E189 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C755D205AA5AF0088E189 /* AppDelegate.swift */; };
 		4F3C7563205AA5AF0088E189 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7561205AA5AF0088E189 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		486FBB99E43E90B80F32D70D /* Pods-ViperAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViperAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViperAppTests/Pods-ViperAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4F07937F2062B8930029E3E6 /* DashboardContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardContracts.swift; sourceTree = "<group>"; };
 		4F28642B205BA3F90073FFA5 /* TDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDService.swift; sourceTree = "<group>"; };
 		4F3C755A205AA5AF0088E189 /* ViperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F3C755D205AA5AF0088E189 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		4F4B3720205AD51E00660151 /* DashboardMain */ = {
 			isa = PBXGroup;
 			children = (
+				4F07937F2062B8930029E3E6 /* DashboardContracts.swift */,
 				4F5B5BCC205E519700963A1C /* DashboardRouter.swift */,
 				4F5B5BD0205E51CE00963A1C /* DashboardViewController.swift */,
 				4F5B5BD2205E51E700963A1C /* DashboardInteractor.swift */,
@@ -490,6 +493,7 @@
 				4F61E5F2205BFCB00030C4A3 /* TDEntities.swift in Sources */,
 				4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */,
 				4FB8FF04205F10DC00C6C808 /* FilterListPresentator.swift in Sources */,
+				4F0793802062B8930029E3E6 /* DashboardContracts.swift in Sources */,
 				4F28642C205BA3F90073FFA5 /* TDService.swift in Sources */,
 				4F5B5BD5205E520E00963A1C /* DashboardPresentator.swift in Sources */,
 				4F4B3756205B74A000660151 /* TDOAuthService.swift in Sources */,

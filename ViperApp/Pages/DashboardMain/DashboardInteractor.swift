@@ -9,12 +9,7 @@
 import Foundation
 import SwiftDate
 
-protocol DashboardInteractorProtocol {
-    func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>)
-    func userLoggingOut()
-}
-
-class DashboardInteractor: DashboardInteractorProtocol {
+class DashboardInteractor: DashboardInteractorInput {
     
     var tdService: TDServiceProtocol!
     
