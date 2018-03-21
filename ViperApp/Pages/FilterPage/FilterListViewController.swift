@@ -10,8 +10,6 @@ import UIKit
 
 class FilterListViewController: UIViewController, FilterListViewInput {
     
-    
-    
     var presentator: FilterListViewOutput?
 
     @IBOutlet weak var segmentControl: UISegmentedControl!

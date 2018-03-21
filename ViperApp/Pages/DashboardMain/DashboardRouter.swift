@@ -62,7 +62,7 @@ class DashboardRouter: RWPRouter, DashboardRouterInput {
     
 }
 
-extension DashboardRouter: FilterListModuleDelegate {
+extension DashboardRouter: FilterListModuleInput {
     func onFilterListReturnWithFilterOptions(filters: [Filter]) {
         presentator?.filterUpdated(filters: filters)
     }

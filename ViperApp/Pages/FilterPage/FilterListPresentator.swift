@@ -12,7 +12,7 @@ class FilterListPresentator: FilterListViewOutput, FilterListRouterOutput, Filte
     
     weak var view: FilterListViewInput!
     var interactor: FilterListInteractorProtocol!
-    var router: FilterListRouterProtocol!
+    var router: FilterListRouterInput!
     var currentSegment: FilterType = .Project
     
     func onDoneTapped() {

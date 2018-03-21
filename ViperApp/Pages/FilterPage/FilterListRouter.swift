@@ -8,32 +8,21 @@
 
 import UIKit
 
-protocol FilterListRouterProtocol {
-    static func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) -> UIViewController
-    static func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)
-    static func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)
-    func dismiss(returning filters: [Filter])
-}
-
-protocol FilterListModuleDelegate {
-    func onFilterListReturnWithFilterOptions(filters: [Filter])
-}
-
-class FilterListRouter: RWPRouter, FilterListRouterProtocol {
+class FilterListRouter: RWPRouter, FilterListRouterInput {
     var presentator: RWPRouterOutput!
     
     
     // Hold reference to view for Segue and other navigation function.
     weak var view: UIViewController!
     // Delegate for passing data back.
-    var delegate: FilterListModuleDelegate?
+    var delegate: FilterListModuleInput?
     
-    class func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) {
+    class func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleInput?, tdService: TDServiceProtocol) {
         let filterListNavController = FilterListRouter.createModule(initial: filters, delegate: delegate, tdService: tdService)
         view.present(filterListNavController, animated: true, completion: nil)
     }
     
-    class func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) -> UIViewController {
+    class func createModule(initial filters: [Filter]?, delegate: FilterListModuleInput?, tdService: TDServiceProtocol) -> UIViewController {
         
         // Instantiate the NavController which we define in Main Storyboard.
         // This will also instantiate our FilterListViewController since the
@@ -44,7 +33,7 @@ class FilterListRouter: RWPRouter, FilterListRouterProtocol {
         return navController
     }
     
-    class func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) {
+    class func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleInput?, tdService: TDServiceProtocol) {
         
         guard let filterListViewController = view.childViewControllers.first as? FilterListViewController
             else {

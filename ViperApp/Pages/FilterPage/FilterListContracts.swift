@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // #########################################################################
-// Protocols
+// MARK - Protocols
 // #########################################################################
 /*
  These naming are PRESENTATOR centric.
@@ -52,6 +52,7 @@ protocol FilterListViewOutput: RWPViewOutput {
 // This defines where can the Presentator
 // tell the router to route to.
 protocol FilterListRouterInput: RWPRouterInput {
+    func dismiss(returning filters: [Filter])
 }
 
 // ------------------------------
@@ -76,4 +77,14 @@ protocol FilterListInteractorInput: RWPInteractorInput {
 // This allow the interactor to pass data back
 // to the presentator.
 protocol FilterListInteractorOutput: RWPInteractorOutput {
+}
+
+
+// #########################################################################
+// MARK - Cross module communication protocols
+// #########################################################################
+
+// This is for other module to pass data back to this module
+protocol FilterListModuleInput: RWPModuleInput {
+    func onFilterListReturnWithFilterOptions(filters: [Filter])
 }

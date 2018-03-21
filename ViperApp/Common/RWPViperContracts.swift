@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // #########################################################################
-// Protocols
+// MARK - Protocols
 // #########################################################################
 /*
  These naming are PRESENTATOR centric.
@@ -81,16 +81,28 @@ protocol RWPInteractorOutput {
 }
 
 // #########################################################################
-// For subclassing
+// MARK - Cross module communication protocols
 // #########################################################################
-// Below these are utilities class providing some default implementation
-// for various functions that are not really for communication between other
-// classes.
 
-// NOTE: I really want an Abstract class here so I can implement some of
-// the default LifeCycle stuffs.
+// This is for other module to pass data back to this module
+protocol RWPModuleInput {
+}
 
-class RWPRouter {
+// #########################################################################
+// MARK - Utility default implementation
+// #########################################################################
+
+// NOTE: I really want an Abstract class concept here so I can implement some of
+// the default LifeCycle stuffs. Unfortunately, as of now (Swift 4.0), that is not
+// supported.
+
+// RWPRouter class should have a static method which return the UIViewController
+// of it own configured module.
+protocol RWPRouter {
+    static var mainStoryboard: UIStoryboard { get }
+}
+
+extension RWPRouter {
     static var mainStoryboard: UIStoryboard {
         return UIStoryboard(name: "Main", bundle: Bundle.main)
     }
