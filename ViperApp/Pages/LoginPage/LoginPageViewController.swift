@@ -8,12 +8,9 @@
 
 import UIKit
 
-protocol LoginPageViewControllerProtocol: AnyObject {
-}
-
-class LoginPageViewController: UIViewController, LoginPageViewControllerProtocol {
+class LoginPageViewController: UIViewController, LoginPageViewInput {
     
-    var presentator: LoginPagePresentatorInput!
+    var presentator: LoginPageViewOutput!
     
     @IBOutlet weak var connectButton: UIButton!
     @IBAction func onConnectButtonPressed(_ sender: Any) {

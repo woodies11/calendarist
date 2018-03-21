@@ -9,20 +9,10 @@
 import UIKit
 import OAuthSwift
 
-protocol LoginPageRouterProtocol {
-    static func createModule(tdService: TDServiceProtocol) -> UIViewController
-    func showLoginPage()
-}
-
-protocol LoginPageRouterDelegate {
-    /// Return with either an Error or a Success<String> with "token" inside
-    func didReturnWithLoginResult(login result:NetworkResult<String>)
-}
-
-class LoginPageRouter: RWPRouter, LoginPageRouterProtocol {
+class LoginPageRouter: RWPRouter, LoginPageRouterInput {
     
     weak var view: UIViewController!
-    var presentator: LoginPagePresentatorInput!
+    var presentator: LoginPageRouterOutput!
     var tdService: TDServiceProtocol!
     
     class func createModule(tdService: TDServiceProtocol) -> UIViewController {

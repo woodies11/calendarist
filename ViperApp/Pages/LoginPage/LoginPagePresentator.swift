@@ -8,18 +8,15 @@
 
 import Foundation
 
-
-protocol LoginPagePresentatorInput: RWPRouterOutput {
-    func initiateLoginProcedure()
-}
-
-class LoginPagePresentator: LoginPagePresentatorInput {
+class LoginPagePresentator: LoginPageViewOutput, LoginPageInteractorOutput, LoginPageRouterOutput {
     
-    weak var view: LoginPageViewControllerProtocol!
-    var interactor: LoginPageInteractorProtocol!
-    var router: LoginPageRouterProtocol!
+    weak var view: LoginPageViewInput!
+    var interactor: LoginPageInteractorInput!
+    var router: LoginPageRouterInput!
     
     func initiateLoginProcedure() {
+        // Since this navigate to Safari to complete,
+        // it is the job of the router.
         router.showLoginPage()
     }
     

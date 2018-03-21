@@ -1,23 +1,13 @@
 //
-//  RWPViperContracts.swift
+//  LoginPageContracts.swift
 //  ViperApp
 //
-//  Created by Romson Preechawit on 18/3/18.
+//  Created by Romson Preechawit on 22/3/18.
 //  Copyright © 2018 RWP. All rights reserved.
 //
 
 import Foundation
 import UIKit
-
-// TIPS:
-// Find
-// ```regex
-// protocol RWP([\w]*):?.*\{
-// ```
-// and Replace with
-// ```regex
-// protocol [MODULE_NAME]$1: RWP$1 {
-// ```
 
 // #########################################################################
 // MARK - Protocols
@@ -25,8 +15,8 @@ import UIKit
 /*
  These naming are PRESENTATOR centric.
  e.g.
-    RWPViewInput is the view's input FROM the PRESENTATOR
-    RWPRouterOutput is the router's output TO the PRESENTATOR
+ RWPViewInput is the view's input FROM the PRESENTATOR
+ RWPRouterOutput is the router's output TO the PRESENTATOR
  
  The naming scheme Input/Output is used instead of delegate and
  the like to avoid confusion since the PRESENTATOR can be a delegate
@@ -38,7 +28,7 @@ import UIKit
 // VIEW <- PRESENTATOR
 // ------------------------------
 // This defines what the view can show.
-protocol RWPViewInput: AnyObject {
+protocol LoginPageViewInput: RWPViewInput {
     
 }
 
@@ -50,8 +40,8 @@ protocol RWPViewInput: AnyObject {
 // can handle.
 //
 // (Basically View Delegate)
-protocol RWPViewOutput {
-    
+protocol LoginPageViewOutput: RWPViewOutput {
+    func initiateLoginProcedure()
 }
 
 // ------------------------------
@@ -59,8 +49,8 @@ protocol RWPViewOutput {
 // ------------------------------
 // This defines where can the Presentator
 // tell the router to route to.
-protocol RWPRouterInput {
-    
+protocol LoginPageRouterInput: RWPRouterInput {
+    func showLoginPage()
 }
 
 // ------------------------------
@@ -68,8 +58,7 @@ protocol RWPRouterInput {
 // ------------------------------
 // This allow the router to pass data to
 // the presentator.
-protocol RWPRouterOutput {
-    
+protocol LoginPageRouterOutput: RWPRouterOutput {
 }
 
 // ------------------------------
@@ -77,7 +66,7 @@ protocol RWPRouterOutput {
 // ------------------------------
 // This define what action can the interactor
 // complete for the presentator.
-protocol RWPInteractorInput {
+protocol LoginPageInteractorInput: RWPInteractorInput {
     
 }
 
@@ -86,7 +75,7 @@ protocol RWPInteractorInput {
 // ------------------------------
 // This allow the interactor to pass data back
 // to the presentator.
-protocol RWPInteractorOutput {
+protocol LoginPageInteractorOutput: RWPInteractorOutput {
     
 }
 
@@ -95,26 +84,7 @@ protocol RWPInteractorOutput {
 // #########################################################################
 
 // This is for other module to pass data back to this module
-protocol RWPModuleInput {
+protocol LoginPageModuleInput: RWPModuleInput {
+    /// Return with either an Error or a Success<String> with "token" inside
+    func didReturnWithLoginResult(login result:NetworkResult<String>)
 }
-
-// #########################################################################
-// MARK - Utility default implementation
-// #########################################################################
-
-// NOTE: I really want an Abstract class concept here so I can implement some of
-// the default LifeCycle stuffs. Unfortunately, as of now (Swift 4.0), that is not
-// supported.
-
-// RWPRouter class should have a static method which return the UIViewController
-// of it own configured module.
-protocol RWPRouter {
-    static var mainStoryboard: UIStoryboard { get }
-}
-
-extension RWPRouter {
-    static var mainStoryboard: UIStoryboard {
-        return UIStoryboard(name: "Main", bundle: Bundle.main)
-    }
-}
-
