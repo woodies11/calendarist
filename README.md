@@ -8,3 +8,6 @@ The app rely on [Todoist](https://todoist.com) for its data. Thus, you will need
 
 ### Note about API privacy
 Since Todoist API currently do not allow non https:// url to be used as OAuth2 redirect URI, I have to redirect the flow to a file on my github page. This file simply forward everything back to the app. It is in no way tracking, collecting, or storing any sort of data anywhere at all.
+
+
+Also, the test API key in older commit has already been reset and will no longer work.
