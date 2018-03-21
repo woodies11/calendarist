@@ -58,6 +58,7 @@ class DashboardInteractorTest: XCTestCase {
                 TDTask(id: 114, completed: false, content: "testtask1", due: mockDue, indent: 1, order: 0, priority: 0, project_id: 115, label_ids: [], url: ""),
                 TDTask(id: 115, completed: false, content: "testtask2", due: mockDue, indent: 1, order: 0, priority: 0, project_id: 115, label_ids: [], url: ""),
                 TDTask(id: 116, completed: false, content: "testtask3", due: mockDue2, indent: 1, order: 0, priority: 0, project_id: 115, label_ids: [], url: ""),
+                TDTask(id: 117, completed: true, content: "testtask4", due: mockDue, indent: 1, order: 0, priority: 0, project_id: 115, label_ids: [], url: ""),
                 
             ]
             
@@ -89,6 +90,8 @@ class DashboardInteractorTest: XCTestCase {
                 }
                 
                 // There should be two tasks here.
+                // "testtask4" should not be included as completed is marked true.
+                // The interactor should ignore any completed task.
                 assert(firstDateTasks.count == 2)
                 
                 // We know for a fact that this is at index 0 since our stub
