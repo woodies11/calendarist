@@ -16,10 +16,10 @@ protocol DashboardInteractorProtocol {
 
 class DashboardInteractor: DashboardInteractorProtocol {
     
-    var tdModule: TodoistModuleProtocol!
+    var tdService: TDServiceProtocol!
     
-    init(todoistModule: TodoistModuleProtocol) {
-        self.tdModule = todoistModule
+    init(tdService: TDServiceProtocol) {
+        self.tdService = tdService
     }
     
     func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>) {
@@ -47,7 +47,7 @@ class DashboardInteractor: DashboardInteractorProtocol {
             }
         }
         
-        tdModule.getTasks(withFilter: tdFilter) { (result) in
+        tdService.getTasks(withFilter: tdFilter) { (result) in
             switch result{
             case .success(let tdTasks):
                 let taskList = self.generateTaskList(tdTasks)
@@ -59,7 +59,7 @@ class DashboardInteractor: DashboardInteractorProtocol {
     }
     
     func userLoggingOut() {
-        tdModule.clearLoginData()
+        tdService.clearLoginData()
     }
     
     private func generateTaskList(_ tdTasks: [TDTask]) -> [Date: [String]] {

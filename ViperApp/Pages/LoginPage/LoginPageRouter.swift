@@ -10,7 +10,7 @@ import UIKit
 import OAuthSwift
 
 protocol LoginPageRouterProtocol: RouterProtocol {
-    static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
+    static func createModule(tdService: TDServiceProtocol) -> UIViewController
     func showLoginPage()
 }
 
@@ -23,9 +23,9 @@ class LoginPageRouter: LoginPageRouterProtocol {
     
     weak var view: UIViewController!
     var presentator: LoginPagePresentatorInput!
-    var todoistModule: TodoistModuleProtocol!
+    var tdService: TDServiceProtocol!
     
-    class func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController {
+    class func createModule(tdService: TDServiceProtocol) -> UIViewController {
         guard let loginViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginPage") as? LoginPageViewController
             else {
                 fatalError("Unable to Instantiate LoginViewController from Storyboard!")
@@ -42,7 +42,7 @@ class LoginPageRouter: LoginPageRouterProtocol {
         
         router.view = loginViewController
         router.presentator = presentator
-        router.todoistModule = todoistModule
+        router.tdService = tdService
         
         loginViewController.presentator = presentator
         
@@ -51,7 +51,7 @@ class LoginPageRouter: LoginPageRouterProtocol {
     }
     
     func showLoginPage() {
-        todoistModule.initiateOAuth(sourceView: self.view) { (result) in
+        tdService.initiateOAuth(sourceView: self.view) { (result) in
             switch result {
             case .success( _):
                 self.showDashboard()
@@ -62,7 +62,7 @@ class LoginPageRouter: LoginPageRouterProtocol {
     }
     
     func showDashboard() {
-        let dashboardView = DashboardRouter.createModule(todoistModule: todoistModule)
+        let dashboardView = DashboardRouter.createModule(tdService: tdService)
         self.view.show(dashboardView, sender: self.view)
     }
     

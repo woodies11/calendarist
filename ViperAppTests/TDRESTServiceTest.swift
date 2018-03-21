@@ -39,10 +39,10 @@ class TDRESTServiceTest: XCTestCase {
         
         // Stub Alamofire response to /projects URL to return our test JSON
         let MOCK_PROJECTS_JSON = [
-            ["id": "177723366", "name": "Inbox", "order": 0, "indent": 1, "comment_count": 0],
-            ["id": "177723369", "name": "Work", "order": 1, "indent": 1, "comment_count": 0],
-            ["id": "178149702", "name": "University", "order": 2, "indent": 1, "comment_count": 0],
-            ["id": "2160755645", "name": "SeniorProject", "order": 4, "indent": 2, "comment_count": 0]
+            ["id": 177723366, "name": "Inbox", "order": 0, "indent": 1, "comment_count": 0],
+            ["id": 177723369, "name": "Work", "order": 1, "indent": 1, "comment_count": 0],
+            ["id": 178149702, "name": "University", "order": 2, "indent": 1, "comment_count": 0],
+            ["id": 2160755645, "name": "SeniorProject", "order": 4, "indent": 2, "comment_count": 0]
         ]
         
         stub(uri(TodolistAPI.projects.url), json(MOCK_PROJECTS_JSON))
@@ -54,10 +54,10 @@ class TDRESTServiceTest: XCTestCase {
         // Create a list of TDProject expected to received
         // FIXME: This may get troublesome to keep insync with the MOCK_PROJECTS_JSON above...
         var expectedResult = [TDProject]()
-        expectedResult.append(TDProject.init(id: "177723366", name: "Inbox", indent: 1, order: 0))
-        expectedResult.append(TDProject.init(id: "177723369", name: "Work", indent: 1, order: 1))
-        expectedResult.append(TDProject.init(id: "178149702", name: "University", indent: 1, order: 2))
-        expectedResult.append(TDProject.init(id: "2160755645", name: "SeniorProject", indent: 2, order: 4))
+        expectedResult.append(TDProject.init(id: 177723366, name: "Inbox", indent: 1, order: 0))
+        expectedResult.append(TDProject.init(id: 177723369, name: "Work", indent: 1, order: 1))
+        expectedResult.append(TDProject.init(id: 178149702, name: "University", indent: 1, order: 2))
+        expectedResult.append(TDProject.init(id: 2160755645, name: "SeniorProject", indent: 2, order: 4))
         
         // Make the function call and wait for response.
         // Note that we are not testing for Error right now so passing nil

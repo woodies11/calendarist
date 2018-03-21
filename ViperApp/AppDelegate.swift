@@ -22,19 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         
-        let tdModule = TodoistModule()
-        let initialViewController = LoginPageRouter.createModule(todoistModule: tdModule)
+        let tdService = TDService()
+        let initialViewController = LoginPageRouter.createModule(tdService: tdService)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         
-        if tdModule.isAuthenticated() {
+        if tdService.isAuthenticated() {
             // If already have credential, show the Dashboard right away!
             // The Login page is ALWAYS loaded first then the Dashboard is displayed
             // later if the user is logged in. This is done so the dashboard can be dismissed
             // to show the Login Page even if the app started while logged in.
-            let dashboardView = DashboardRouter.createModule(todoistModule: tdModule)
+            let dashboardView = DashboardRouter.createModule(tdService: tdService)
             self.window?.rootViewController?.present(dashboardView, animated: false, completion: nil)
         }
         

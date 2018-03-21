@@ -19,12 +19,12 @@ class FilterListInteractor: FilterListInteractorProtocol {
     
     var localFiltersList: [Filter]?
     
-    var todoistModule: TodoistModuleProtocol!
+    var tdService: TDServiceProtocol!
     
     // TODO: Find a better way to do Dependency Injection
-    init(initial filters: [Filter]?, todoistModule: TodoistModuleProtocol) {
+    init(initial filters: [Filter]?, tdService: TDServiceProtocol) {
         self.localFiltersList = filters
-        self.todoistModule = todoistModule
+        self.tdService = tdService
     }
     
     /// A utility function to filter out only Filters of certain type.
@@ -83,7 +83,7 @@ class FilterListInteractor: FilterListInteractorProtocol {
             var tmpFilterList: [Filter] = []
             
             dispatchGroup.enter()
-            self.todoistModule.getAllProjects { (result) in
+            self.tdService.getAllProjects { (result) in
                 var projectFilters: [Filter] = []
                 switch result{
                 case .success(let projects):
@@ -111,7 +111,7 @@ class FilterListInteractor: FilterListInteractorProtocol {
             }
             
             dispatchGroup.enter()
-            self.todoistModule.getAllLabels { (result) in
+            self.tdService.getAllLabels { (result) in
                 var labelFilters: [Filter] = []
                 switch result{
                 case .success(let labels):

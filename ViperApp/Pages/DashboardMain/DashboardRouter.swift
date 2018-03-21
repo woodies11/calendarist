@@ -10,7 +10,7 @@
 import UIKit
 
 protocol DashboardRouterProtocol: RouterProtocol {
-    static func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController
+    static func createModule(tdService: TDServiceProtocol) -> UIViewController
     func presentFilterList(initial filters: [Filter]?)
     func navigateBackToLogin()
 }
@@ -20,13 +20,13 @@ class DashboardRouter: DashboardRouterProtocol {
     // Hold reference to view for Segue and other navigation function.
     weak var view: UIViewController!
     var presentator: DashboardPresentatorDelegate!
-    var todoistModule: TodoistModuleProtocol!
+    var tdService: TDServiceProtocol!
     
     /**
      create, bind, and initialize DashboardViewController
      @return UIViewController
      */
-    class func createModule(todoistModule: TodoistModuleProtocol) -> UIViewController {
+    class func createModule(tdService: TDServiceProtocol) -> UIViewController {
         
         // Instantiate the NavController which we define in Main Storyboard.
         // This will also instantiate our DashboardViewController since the
@@ -39,7 +39,7 @@ class DashboardRouter: DashboardRouterProtocol {
         
         // Create and assign the needed component in our VIPER module
         let presentator = DashboardPresentator()
-        let interactor = DashboardInteractor(todoistModule: todoistModule)
+        let interactor = DashboardInteractor(tdService: tdService)
         let router = DashboardRouter()
         
         presentator.interactor = interactor
@@ -50,7 +50,7 @@ class DashboardRouter: DashboardRouterProtocol {
         router.presentator = presentator
         
         // FIXME: change to a better dependency injecting
-        router.todoistModule = todoistModule
+        router.tdService = tdService
         
         dashboardViewController.presentator = presentator
         
@@ -59,7 +59,7 @@ class DashboardRouter: DashboardRouterProtocol {
     }
     
     func presentFilterList(initial filters: [Filter]?) {
-        FilterListRouter.presentModally(targetView: view, initial: filters, delegate: self, todoistModule: self.todoistModule)
+        FilterListRouter.presentModally(targetView: view, initial: filters, delegate: self, tdService: self.tdService)
     }
     
     func navigateBackToLogin() {

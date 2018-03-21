@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol TodoistModuleProtocol {
+protocol TDServiceProtocol {
     func getTasks(withFilter filters: TDFilter?, completion: @escaping NetworkCompletionHandler<[TDTask]>)
     func getAllLabels(completion: @escaping NetworkCompletionHandler<[TDLabel]>)
     func getAllProjects(completion: @escaping NetworkCompletionHandler<[TDProject]>)
@@ -17,7 +17,7 @@ protocol TodoistModuleProtocol {
     func clearLoginData()
 }
 
-class TodoistModule: TodoistModuleProtocol {
+class TDService: TDServiceProtocol {
     
     static let USER_DEFAULT_TOKEN_KEY = "USER_DEFAULT_TOKEN_KEY"
     
@@ -28,14 +28,14 @@ class TodoistModule: TodoistModuleProtocol {
     
     init() {
         // Try to load stored token first
-        if let access_token = UserDefaults.standard.string(forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY) {
+        if let access_token = UserDefaults.standard.string(forKey: TDService.USER_DEFAULT_TOKEN_KEY) {
             self.token = access_token
             self.tdSyncService = TDRESTService(token: access_token)
         }
     }
     
     func clearLoginData() {
-        UserDefaults.standard.removeObject(forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY)
+        UserDefaults.standard.removeObject(forKey: TDService.USER_DEFAULT_TOKEN_KEY)
     }
     
     // TODO: change to completion handler
@@ -43,7 +43,7 @@ class TodoistModule: TodoistModuleProtocol {
         tdOAuthService = TDOAuthService()
         
         // try to get token
-        if let access_token = UserDefaults.standard.string(forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY) {
+        if let access_token = UserDefaults.standard.string(forKey: TDService.USER_DEFAULT_TOKEN_KEY) {
             self.token = access_token
             self.tdSyncService = TDRESTService(token: access_token)
             completion(.success(true))
@@ -51,7 +51,7 @@ class TodoistModule: TodoistModuleProtocol {
         }
         
         tdOAuthService.initiateOAuth(displayOAuthPageOn: view, error: nil) { (access_token) in
-            UserDefaults.standard.setValue(access_token, forKey: TodoistModule.USER_DEFAULT_TOKEN_KEY)
+            UserDefaults.standard.setValue(access_token, forKey: TDService.USER_DEFAULT_TOKEN_KEY)
             self.token = access_token
             self.tdSyncService = TDRESTService(token: access_token)
             completion(.success(true))

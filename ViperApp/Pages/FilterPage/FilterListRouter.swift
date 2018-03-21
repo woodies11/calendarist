@@ -35,9 +35,9 @@ enum FilterType: Int {
 }
 
 protocol FilterListRouterProtocol: RouterProtocol {
-    static func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) -> UIViewController
-    static func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol)
-    static func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol)
+    static func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) -> UIViewController
+    static func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)
+    static func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)
     func dismiss(returning filters: [Filter])
 }
 
@@ -52,23 +52,23 @@ class FilterListRouter: FilterListRouterProtocol {
     // Delegate for passing data back.
     var delegate: FilterListModuleDelegate?
     
-    class func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) {
-        let filterListNavController = FilterListRouter.createModule(initial: filters, delegate: delegate, todoistModule: todoistModule)
+    class func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) {
+        let filterListNavController = FilterListRouter.createModule(initial: filters, delegate: delegate, tdService: tdService)
         view.present(filterListNavController, animated: true, completion: nil)
     }
     
-    class func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) -> UIViewController {
+    class func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) -> UIViewController {
         
         // Instantiate the NavController which we define in Main Storyboard.
         // This will also instantiate our FilterListViewController since the
         // NavController have the view as its RootViewController.
         let navController = mainStoryboard.instantiateViewController(withIdentifier: "FilterNavController")
-        FilterListRouter.configureModule(navigationController: navController, initial: filters, delegate: delegate, todoistModule: todoistModule)
+        FilterListRouter.configureModule(navigationController: navController, initial: filters, delegate: delegate, tdService: tdService)
         
         return navController
     }
     
-    class func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, todoistModule: TodoistModuleProtocol) {
+    class func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) {
         
         guard let filterListViewController = view.childViewControllers.first as? FilterListViewController
             else {
@@ -77,7 +77,7 @@ class FilterListRouter: FilterListRouterProtocol {
         
         // Create and assign the needed component to our ViewController
         let presentator = FilterListPresentator()
-        let interactor = FilterListInteractor(initial: filters, todoistModule: todoistModule)
+        let interactor = FilterListInteractor(initial: filters, tdService: tdService)
         let router = FilterListRouter()
         
         router.view = filterListViewController
