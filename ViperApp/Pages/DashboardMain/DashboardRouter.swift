@@ -9,7 +9,7 @@
 
 import UIKit
 
-protocol DashboardRouterProtocol: RouterProtocol {
+protocol DashboardRouterProtocol: RWPRouterProtocol {
     static func createModule(tdService: TDServiceProtocol) -> UIViewController
     func presentFilterList(initial filters: [Filter]?)
     func navigateBackToLogin()

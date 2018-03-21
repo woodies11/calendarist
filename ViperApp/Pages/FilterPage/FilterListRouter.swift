@@ -34,7 +34,7 @@ enum FilterType: Int {
     case Label = 1
 }
 
-protocol FilterListRouterProtocol: RouterProtocol {
+protocol FilterListRouterProtocol: RWPRouterProtocol {
     static func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) -> UIViewController
     static func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)
     static func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)

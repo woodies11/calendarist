@@ -9,7 +9,7 @@
 import UIKit
 import OAuthSwift
 
-protocol LoginPageRouterProtocol: RouterProtocol {
+protocol LoginPageRouterProtocol: RWPRouterProtocol {
     static func createModule(tdService: TDServiceProtocol) -> UIViewController
     func showLoginPage()
 }
