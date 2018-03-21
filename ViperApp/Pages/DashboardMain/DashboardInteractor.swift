@@ -53,7 +53,7 @@ class DashboardInteractor: DashboardInteractorInput {
         }
     }
     
-    func userLoggingOut() {
+    func clearUserCredential() {
         tdService.clearLoginData()
     }
     

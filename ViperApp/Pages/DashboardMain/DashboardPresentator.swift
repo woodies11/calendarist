@@ -29,7 +29,7 @@ class DashboardPresentator: DashboardRouterOutput, DashboardViewOutput, Dashboar
         interactor.getTasks(withFilters: currentFilters) { (result) in
             switch result{
             case .success(let taskList):
-                self.view?.taskList = taskList
+                self.view?.showTasks(taskList: taskList)
             case .error:
                 self.view?.showAlert(title: "Oops...", message: "Cannot get tasks. Please check your Internet Connection.")
             }
@@ -47,7 +47,7 @@ class DashboardPresentator: DashboardRouterOutput, DashboardViewOutput, Dashboar
     }
     
     func onLogoutButtonTapped() {
-        interactor.userLoggingOut()
+        interactor.clearUserCredential()
         router.navigateBackToLogin()
     }
     

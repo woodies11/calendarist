@@ -15,25 +15,26 @@ class DashboardViewController: UIViewController, DashboardViewInput {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var calendar: FSCalendar!
-    
-    // We could have the Presentator ask for a list of task only
-    // for a specific date from the Interactor but since we need
-    // all the task present in that month to display the whole
-    // calendar anyway, let's just have the tableview decide
-    // what to display by itself.
-    var taskList: [Date: [String]] = [:] {
-        didSet {
-            tableView.reloadData()
-            calendar.reloadData()
-        }
-    }
-    
+
     @IBAction func onFilterButtonTapped(_ sender: Any) {
         presentator?.onFilterButtonTapped()
     }
     
     @IBAction func onLogoutButtonTapped(_ sender: Any) {
         presentator?.onLogoutButtonTapped()
+    }
+    
+    // We could have the Presentator ask for a list of task only
+    // for a specific date from the Interactor but since we need
+    // all the task present in that month to display the whole
+    // calendar anyway, let's just have the tableview decide
+    // what to display by itself.
+    var taskList: [Date: [String]] = [:]
+    
+    func showTasks(taskList: [Date : [String]]) {
+        self.taskList = taskList
+        tableView.reloadData()
+        calendar.reloadData()
     }
     
     func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?) {

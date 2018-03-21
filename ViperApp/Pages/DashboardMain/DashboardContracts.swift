@@ -31,7 +31,7 @@ import UIKit
 // ------------------------------
 // This defines what the view can show.
 protocol DashboardViewInput: RWPViewInput {
-    var taskList: [Date: [String]] { get set }
+    func showTasks(taskList: [Date: [String]])
     func showAlert(title: String, message: String)
     func presentViewModally(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
 }
@@ -77,7 +77,7 @@ protocol DashboardRouterOutput: RWPRouterOutput {
 // complete for the presentator.
 protocol DashboardInteractorInput: RWPInteractorInput {
     func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>)
-    func userLoggingOut()
+    func clearUserCredential()
 }
 
 // ------------------------------
