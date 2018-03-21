@@ -14,7 +14,6 @@
 		4F3C7563205AA5AF0088E189 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7561205AA5AF0088E189 /* Main.storyboard */; };
 		4F3C7565205AA5AF0088E189 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7564205AA5AF0088E189 /* Assets.xcassets */; };
 		4F3C7568205AA5AF0088E189 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F3C7566205AA5AF0088E189 /* LaunchScreen.storyboard */; };
-		4F3C7573205AA5AF0088E189 /* ViperAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */; };
 		4F4B3724205AD6FC00660151 /* TDRESTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3723205AD6FC00660151 /* TDRESTService.swift */; };
 		4F4B3726205AD84800660151 /* TDRESTServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3725205AD84800660151 /* TDRESTServiceTest.swift */; };
 		4F4B3756205B74A000660151 /* TDOAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4B3755205B74A000660151 /* TDOAuthService.swift */; };
@@ -36,6 +35,9 @@
 		4FB8FF44206169AE00C6C808 /* LoginPagePresentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF43206169AE00C6C808 /* LoginPagePresentator.swift */; };
 		4FB8FF46206169DD00C6C808 /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF45206169DD00C6C808 /* LoginPageViewController.swift */; };
 		4FF827AC2062C7B500DD2D19 /* LoginPageContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF827AB2062C7B500DD2D19 /* LoginPageContracts.swift */; };
+		4FF827AE2062CD7E00DD2D19 /* TDServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF827AD2062CD7E00DD2D19 /* TDServiceTest.swift */; };
+		4FF827B02062CE6200DD2D19 /* UserDefaultsExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF827AF2062CE6200DD2D19 /* UserDefaultsExtention.swift */; };
+		4FF827B22062D7C300DD2D19 /* DashboardInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF827B12062D7C300DD2D19 /* DashboardInteractorTest.swift */; };
 		4FF9DAE52062BD8E0059457D /* FilterListContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9DAE42062BD8E0059457D /* FilterListContracts.swift */; };
 		9809D87197CF5BF795035D29 /* Pods_ViperAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B4D179AE49A581BE26C9FD /* Pods_ViperAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -61,7 +63,6 @@
 		4F3C7567205AA5AF0088E189 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F3C7569205AA5AF0088E189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F3C756E205AA5AF0088E189 /* ViperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViperAppTests.swift; sourceTree = "<group>"; };
 		4F3C7574205AA5AF0088E189 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F4B3723205AD6FC00660151 /* TDRESTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDRESTService.swift; sourceTree = "<group>"; };
 		4F4B3725205AD84800660151 /* TDRESTServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDRESTServiceTest.swift; sourceTree = "<group>"; };
@@ -84,6 +85,9 @@
 		4FB8FF43206169AE00C6C808 /* LoginPagePresentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPagePresentator.swift; sourceTree = "<group>"; };
 		4FB8FF45206169DD00C6C808 /* LoginPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 		4FF827AB2062C7B500DD2D19 /* LoginPageContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageContracts.swift; sourceTree = "<group>"; };
+		4FF827AD2062CD7E00DD2D19 /* TDServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDServiceTest.swift; sourceTree = "<group>"; };
+		4FF827AF2062CE6200DD2D19 /* UserDefaultsExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtention.swift; sourceTree = "<group>"; };
+		4FF827B12062D7C300DD2D19 /* DashboardInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInteractorTest.swift; sourceTree = "<group>"; };
 		4FF9DAE42062BD8E0059457D /* FilterListContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListContracts.swift; sourceTree = "<group>"; };
 		59DBF9B77FEF919857AA6717 /* Pods_ViperApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViperApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D978D063FCA25ECD2D69641 /* Pods-ViperApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViperApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViperApp/Pods-ViperApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,9 +164,11 @@
 		4F3C7571205AA5AF0088E189 /* ViperAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				4F4B3725205AD84800660151 /* TDRESTServiceTest.swift */,
-				4F3C7572205AA5AF0088E189 /* ViperAppTests.swift */,
 				4F3C7574205AA5AF0088E189 /* Info.plist */,
+				4F4B3725205AD84800660151 /* TDRESTServiceTest.swift */,
+				4FF827AD2062CD7E00DD2D19 /* TDServiceTest.swift */,
+				4FF827B12062D7C300DD2D19 /* DashboardInteractorTest.swift */,
+				4FF827AF2062CE6200DD2D19 /* UserDefaultsExtention.swift */,
 			);
 			path = ViperAppTests;
 			sourceTree = "<group>";
@@ -527,7 +533,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F4B3726205AD84800660151 /* TDRESTServiceTest.swift in Sources */,
-				4F3C7573205AA5AF0088E189 /* ViperAppTests.swift in Sources */,
+				4FF827AE2062CD7E00DD2D19 /* TDServiceTest.swift in Sources */,
+				4FF827B02062CE6200DD2D19 /* UserDefaultsExtention.swift in Sources */,
+				4FF827B22062D7C300DD2D19 /* DashboardInteractorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,29 +23,35 @@ class TDService: TDServiceProtocol {
     
     var token: String?
     
-    var tdOAuthService: TDOAuthService!
-    var tdSyncService: TDRESTService!
+    // FIXME: should change to protocol... but we only ever use it to get
+    // the token...
+    // TODO: look at separation of concerns and trade off of combining
+    var tdOAuthService: TDOAuthServiceProtocol!
+    var tdRESTService: TDRESTServiceProtocol!
     
     init() {
         // Try to load stored token first
         if let access_token = UserDefaults.standard.string(forKey: TDService.USER_DEFAULT_TOKEN_KEY) {
             self.token = access_token
-            self.tdSyncService = TDRESTService(token: access_token)
+            self.tdRESTService = TDRESTService(token: access_token)
         }
     }
     
     func clearLoginData() {
         UserDefaults.standard.removeObject(forKey: TDService.USER_DEFAULT_TOKEN_KEY)
+        self.token = nil
     }
     
     // TODO: change to completion handler
     func initiateOAuth(sourceView view: UIViewController, completion: @escaping NetworkCompletionHandler<Bool>) {
-        tdOAuthService = TDOAuthService()
+        if tdOAuthService == nil {
+            tdOAuthService = TDOAuthService()
+        }
         
         // try to get token
         if let access_token = UserDefaults.standard.string(forKey: TDService.USER_DEFAULT_TOKEN_KEY) {
             self.token = access_token
-            self.tdSyncService = TDRESTService(token: access_token)
+            self.tdRESTService = TDRESTService(token: access_token)
             completion(.success(true))
             return
         }
@@ -53,7 +59,7 @@ class TDService: TDServiceProtocol {
         tdOAuthService.initiateOAuth(displayOAuthPageOn: view, error: nil) { (access_token) in
             UserDefaults.standard.setValue(access_token, forKey: TDService.USER_DEFAULT_TOKEN_KEY)
             self.token = access_token
-            self.tdSyncService = TDRESTService(token: access_token)
+            self.tdRESTService = TDRESTService(token: access_token)
             completion(.success(true))
             return
         }
@@ -68,7 +74,7 @@ class TDService: TDServiceProtocol {
             // FIXME: should throw exception or redirect user to login page
             completion(.error)
         }
-        tdSyncService.getTasks(withFilter: filters, completion: completion)
+        tdRESTService.getTasks(withFilter: filters, completion: completion)
         
     }
     
@@ -77,7 +83,7 @@ class TDService: TDServiceProtocol {
             // FIXME: should throw exception or redirect user to login page
             completion(.error)
         }
-        tdSyncService.getAllLabels(completion: completion)
+        tdRESTService.getAllLabels(completion: completion)
     }
     
     func getAllProjects(completion: @escaping (NetworkResult<[TDProject]>) -> Void) {
@@ -85,7 +91,7 @@ class TDService: TDServiceProtocol {
             // FIXME: should throw exception or redirect user to login page
             completion(.error)
         }
-        tdSyncService.getAllProjects(completion: completion)
+        tdRESTService.getAllProjects(completion: completion)
     }
     
     

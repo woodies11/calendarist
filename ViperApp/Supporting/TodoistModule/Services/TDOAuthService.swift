@@ -9,12 +9,16 @@
 import Foundation
 import OAuthSwift
 
+protocol TDOAuthServiceProtocol {
+    func initiateOAuth(displayOAuthPageOn view: UIViewController, error: ((AnyObject?) -> Void)?, success: @escaping (String) -> Void)
+}
+
 // : AnyObject in Swift 4 == : class in Swift 3
 protocol OAuthService: AnyObject {
     func initiateOAuth(displayOAuthPageOn view: UIViewController, error: ((AnyObject?) -> Void)?, success: @escaping (String) -> Void)
 }
 
-class TDOAuthService: OAuthService {
+class TDOAuthService: TDOAuthServiceProtocol, OAuthService {
     
     let oauthswift = OAuth2Swift(
         consumerKey: "6708fc59ee7f4746a6ea4ef13f660585",
