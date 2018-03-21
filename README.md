@@ -1,4 +1,4 @@
-# calendarist
+# Calendarist
 An app that fetch all tasks from Todoist and display a heat map calendar based on number of tasks due on each date.
 
 The app was created as part of a practice to learn the VIPER architecture.
