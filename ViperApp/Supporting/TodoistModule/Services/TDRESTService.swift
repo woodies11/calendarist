@@ -17,6 +17,8 @@ protocol TDRESTServiceProtocol {
 
 class TDRESTService: TDRESTServiceProtocol {
     
+    // TODO: Implement some form of caching to speed up requests. -> Might do in a DataManager?
+    
     // IMPORTANT: As of SE-0054, ImplicitlyUnwrappedOptional change to complier annotation only
     // This mean that String! is allow to be treated as String but will ALWAYS be treated as String?
     // with ever available.
@@ -81,6 +83,33 @@ class TDRESTService: TDRESTServiceProtocol {
                 completion(.error)
                 return
             }
+            
+            // ============================================================
+            // TODO: Should filtering be moved to a DataManager?
+            // ============================================================
+            // REST could only be responsible for data fetching...
+            // but then again, Filtering could be a part of RESTAPI
+            // We are only doing it here because of the nature
+            // of the current Todoist API.
+            //
+            // Possible Method:
+            // ------------------
+            // > We wrap this in a DataManager and have the DataManager
+            // decide if it should use RESTAPI or do filtering manually
+            //      - If in the future, backend filtering become possible
+            //      then we can implement it in our TDRESTService and update
+            //      the DataManager class accordingly
+            //
+            // > Since the RESTService promise Filtering function, we hide
+            // away whether the filtering is done by backend or frontend
+            //      - If in the future, backend filtering become possible
+            //      we only need to change TDRESTService.
+            //
+            // ------------------
+            // Currently, the latter is chosen
+            //
+            // ============================================================
+            
             
             // If a filter is given, do filtering here.
             // --------------------
