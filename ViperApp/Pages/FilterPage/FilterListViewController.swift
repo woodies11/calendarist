@@ -8,19 +8,11 @@
 
 import UIKit
 
-protocol FilterListViewControllerProtocol: AnyObject {
-    var filters: [Filter] { get set }
-}
-
-protocol FilterListViewDelegate {
-    func viewDidLoad()
-    func onDoneTapped()
-    func onSegmentChange(to page: FilterType)
-}
-
-class FilterListViewController: UIViewController, FilterListViewControllerProtocol {
+class FilterListViewController: UIViewController, FilterListViewInput {
     
-    var presentator: FilterListViewDelegate?
+    
+    
+    var presentator: FilterListViewOutput?
 
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -29,6 +21,10 @@ class FilterListViewController: UIViewController, FilterListViewControllerProtoc
         didSet {
             tableView?.reloadData()
         }
+    }
+    
+    func showFilters(filters: [Filter]) {
+        self.filters = filters
     }
     
     @IBAction func onSegmentChanged(_ sender: UISegmentedControl) {

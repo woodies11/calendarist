@@ -8,9 +8,9 @@
 
 import Foundation
 
-class FilterListPresentator: FilterListViewDelegate {
+class FilterListPresentator: FilterListViewOutput, FilterListRouterOutput, FilterListInteractorOutput {
     
-    weak var view: FilterListViewControllerProtocol!
+    weak var view: FilterListViewInput!
     var interactor: FilterListInteractorProtocol!
     var router: FilterListRouterProtocol!
     var currentSegment: FilterType = .Project
@@ -33,7 +33,7 @@ class FilterListPresentator: FilterListViewDelegate {
             case .error:
                 () // TODO: show alert
             case .success(let filters):
-                self.view.filters = filters
+                self.view.showFilters(filters: filters)
             }
         }
     }

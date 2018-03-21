@@ -35,6 +35,7 @@
 		4FB8FF422061699400C6C808 /* LoginPageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF412061699400C6C808 /* LoginPageInteractor.swift */; };
 		4FB8FF44206169AE00C6C808 /* LoginPagePresentator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF43206169AE00C6C808 /* LoginPagePresentator.swift */; };
 		4FB8FF46206169DD00C6C808 /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB8FF45206169DD00C6C808 /* LoginPageViewController.swift */; };
+		4FF9DAE52062BD8E0059457D /* FilterListContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF9DAE42062BD8E0059457D /* FilterListContracts.swift */; };
 		9809D87197CF5BF795035D29 /* Pods_ViperAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2B4D179AE49A581BE26C9FD /* Pods_ViperAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		4FB8FF412061699400C6C808 /* LoginPageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageInteractor.swift; sourceTree = "<group>"; };
 		4FB8FF43206169AE00C6C808 /* LoginPagePresentator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPagePresentator.swift; sourceTree = "<group>"; };
 		4FB8FF45206169DD00C6C808 /* LoginPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
+		4FF9DAE42062BD8E0059457D /* FilterListContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListContracts.swift; sourceTree = "<group>"; };
 		59DBF9B77FEF919857AA6717 /* Pods_ViperApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViperApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D978D063FCA25ECD2D69641 /* Pods-ViperApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViperApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViperApp/Pods-ViperApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C2B4D179AE49A581BE26C9FD /* Pods_ViperAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViperAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,6 +190,7 @@
 		4F4B3721205AD53100660151 /* FilterPage */ = {
 			isa = PBXGroup;
 			children = (
+				4FF9DAE42062BD8E0059457D /* FilterListContracts.swift */,
 				4FB8FEFB205F10A200C6C808 /* FilterListViewController.swift */,
 				4FB8FEFD205F10AC00C6C808 /* FilterListRouter.swift */,
 				4FB8FF05205F10E800C6C808 /* FilterListInteractor.swift */,
@@ -492,6 +495,7 @@
 				4FB8FF06205F10E800C6C808 /* FilterListInteractor.swift in Sources */,
 				4F61E5F2205BFCB00030C4A3 /* TDEntities.swift in Sources */,
 				4F61E5F0205BF8060030C4A3 /* TDEndpoint.swift in Sources */,
+				4FF9DAE52062BD8E0059457D /* FilterListContracts.swift in Sources */,
 				4FB8FF04205F10DC00C6C808 /* FilterListPresentator.swift in Sources */,
 				4F0793802062B8930029E3E6 /* DashboardContracts.swift in Sources */,
 				4F28642C205BA3F90073FFA5 /* TDService.swift in Sources */,
