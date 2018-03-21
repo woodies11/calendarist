@@ -34,7 +34,7 @@ enum FilterType: Int {
     case Label = 1
 }
 
-protocol FilterListRouterProtocol: RWPRouterProtocol {
+protocol FilterListRouterProtocol {
     static func createModule(initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol) -> UIViewController
     static func configureModule(navigationController view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)
     static func presentModally(targetView view: UIViewController, initial filters: [Filter]?, delegate: FilterListModuleDelegate?, tdService: TDServiceProtocol)
@@ -45,7 +45,7 @@ protocol FilterListModuleDelegate {
     func onFilterListReturnWithFilterOptions(filters: [Filter])
 }
 
-class FilterListRouter: FilterListRouterProtocol {
+class FilterListRouter: RWPRouter, FilterListRouterProtocol {
     
     // Hold reference to view for Segue and other navigation function.
     weak var view: UIViewController!

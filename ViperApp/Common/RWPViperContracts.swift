@@ -9,20 +9,25 @@
 import Foundation
 import UIKit
 
-protocol RWPRouterProtocol {
-    static var mainStoryboard: UIStoryboard { get }
-}
-
-extension RWPRouterProtocol {
-    static var mainStoryboard: UIStoryboard {
-        return UIStoryboard(name: "Main", bundle: Bundle.main)
-    }
-}
+/*
+ These naming are PRESENTATOR centric.
+ e.g.
+    RWPViewInput is the view's input FROM the PRESENTATOR
+    RWPRouterOutput is the router's output TO the PRESENTATOR
+ 
+ The naming scheme Input/Output is used instead of delegate and
+ the like to avoid confusion since the PRESENTATOR can be a delegate
+ for the View, the Interactor, and the Router, all at the same time.
+ 
+ */
 
 // ------------------------------
-// PRESENTATOR -> VIEW
+// VIEW <- PRESENTATOR
 // ------------------------------
 // This defines what the view can show.
+protocol RWPViewInput: AnyObject {
+    
+}
 
 // ------------------------------
 // VIEW -> PRESENTATOR
@@ -30,28 +35,64 @@ extension RWPRouterProtocol {
 // This defines what the view SHOULD tell the
 // presentator and what UI action the presentator
 // can handle.
+//
+// (Basically View Delegate)
+protocol RWPViewOutput {
+    
+}
 
 // ------------------------------
-// PRESENTATOR -> ROUTER
+// ROUTER <- PRESENTATOR
 // ------------------------------
 // This defines where can the Presentator
 // tell the router to route to.
+protocol RWPRouterInput {
+    
+}
 
 // ------------------------------
 // ROUTER -> PRESENTATOR
 // ------------------------------
 // This allow the router to pass data to
 // the presentator.
+protocol RWPRouterOutput {
+    
+}
 
 // ------------------------------
-// PRESENTATOR -> INTERACTOR
+// INTERACTOR <- PRESENTATOR
 // ------------------------------
 // This define what action can the interactor
 // complete for the presentator.
+protocol RWPInteractorInput {
+    
+}
 
 // ------------------------------
 // INTERACTOR -> PRESENTATOR
 // ------------------------------
 // This allow the interactor to pass data back
 // to the presentator.
+protocol RWPInteractorOutput {
+    
+}
 
+// #########################################################################
+// Below these are utilities class providing some default implementation
+// for various functions that are not really for communication between other
+// classes.
+
+class RWPPresentator: RWPViewOutput, RWPRouterOutput, RWPInteractorOutput {
+}
+
+class RWPRouter: RWPRouterInput {
+    static var mainStoryboard: UIStoryboard {
+        return UIStoryboard(name: "Main", bundle: Bundle.main)
+    }
+}
+
+class RWPView: UIViewController, RWPViewInput {
+}
+
+class RWPInteractor: RWPInteractorInput {
+}
