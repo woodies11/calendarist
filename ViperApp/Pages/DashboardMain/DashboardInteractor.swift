@@ -19,7 +19,49 @@ class DashboardInteractor: DashboardInteractorInput {
     
     func getTasks(withFilters filters: [Filter]?, completion: @escaping NetworkCompletionHandler<[Date: [String]]>) {
         
-        var tdFilter: TDFilter?
+        let tdFilter: TDFilter? = DashboardInteractor.toTDFilter(filters)
+        
+        tdService.getTasks(withFilter: tdFilter) { (result) in
+            switch result{
+            case .success(let tdTasks):
+                let taskList = self.generateTaskList(tdTasks)
+                completion(.success(taskList))
+            case .error:
+                completion(.error)
+            }
+        }
+    }
+    
+    func clearUserCredential() {
+        tdService.clearLoginData()
+    }
+    
+    // ====================================================================================
+    // MARK - Utility Functions
+    // ====================================================================================
+    
+    /// Convert our [TDTask] entity to a POSDS (Plain Old Swift Data Structure)
+    private func generateTaskList(_ tdTasks: [TDTask]) -> [Date: [String]] {
+        var taskList: [Date: [String]] = [:]
+        
+        for tdTask in tdTasks {
+            if tdTask.completed { continue }
+            guard let dueDateTime = tdTask.due else { continue }
+            
+            let dueDateIgnoreTime = dueDateTime.date.startOfDay
+            if taskList[dueDateIgnoreTime] == nil {
+                taskList[dueDateIgnoreTime] = [String]()
+            }
+            
+            taskList[dueDateIgnoreTime]!.append(tdTask.content)
+        }
+        return taskList
+    }
+    
+    /// Convert our POSO (Plain Old Swift Object) Filter into
+    /// TDFilter entity which is used by TDService
+    private static func toTDFilter(_ filters: [Filter]?) -> TDFilter? {
+        var tdFilter: TDFilter? = nil
         
         if let filters = filters {
             
@@ -42,37 +84,6 @@ class DashboardInteractor: DashboardInteractorInput {
             }
         }
         
-        tdService.getTasks(withFilter: tdFilter) { (result) in
-            switch result{
-            case .success(let tdTasks):
-                let taskList = self.generateTaskList(tdTasks)
-                completion(.success(taskList))
-            case .error:
-                completion(.error)
-            }
-        }
-    }
-    
-    func clearUserCredential() {
-        tdService.clearLoginData()
-    }
-    
-    private func generateTaskList(_ tdTasks: [TDTask]) -> [Date: [String]] {
-        var taskList: [Date: [String]] = [:]
-        
-        // TODO: Prepare filter here
-        
-        for tdTask in tdTasks {
-            if tdTask.completed { continue }
-            guard let dueDateTime = tdTask.due else { continue }
-            
-            let dueDateIgnoreTime = dueDateTime.date.startOfDay
-            if taskList[dueDateIgnoreTime] == nil {
-                taskList[dueDateIgnoreTime] = [String]()
-            }
-            
-            taskList[dueDateIgnoreTime]!.append(tdTask.content)
-        }
-        return taskList
+        return tdFilter
     }
 }
