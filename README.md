@@ -21,7 +21,7 @@ I am currently in the middle of doing senior project so I might update this app 
 As of now, the app work with basic use cases.
 
 - **Better Error Handling**
-However, error reporting/handling is very limited. Right now, every error generated from Todoist API is assumed to be network connection error. For example, if the user decided to revoke API access when logged in, the app will simply tell the user to check their Internet Connection and will required the user to manually log out and log back in again to re-request access.
+Currently, error reporting/handling is very limited. Right now, every error generated from Todoist API is assumed to be network connection error. For example, if the user decided to revoke API access when logged in, the app will simply tell the user to check their Internet Connection and will required the user to manually log out and log back in again to re-request access.
 
 - **Better VIPER Base Protocols**
 I will look into using techniques like `associatedtype` to make the base protocols in my custom VIPER framework work better. 
